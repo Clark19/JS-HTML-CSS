@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JQuery 연습</title>
+  <style>
+  p { background-color: skyblue;}
+  </style>
+</head>
+<body>
+  <h2 id="one">One</h2>
+  <p>P Skyblue 문단</p>
+  <button id="two" >눌러!!</button>
+
+  <h1 class="one">helloworld 1</h1>
+  <h1 class="one two">helloworld 2</h1>
+  <h1 id="four" class="one two three">helloworld 3</h1>
+  <h1>helloworld 4</h1>
+  <h1>helloworld 5</h1>
+  <h1>helloworld 6</h1>
+  <h1>helloworld 7</h1>
+<!--  jQuery 는
+    1. 엘리먼트를 선택할 수 있는 강력한 방법
+    2. 선택된 엘리먼트를 효율적으로 제어할 수 있는 방법
+-->
+
+  <br>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+  <script>
+    // function f() {
+    //   // document.getElementById('one').innerHTML = "One 이 바꼈네";
+    //     $('#one').html('One 이 바꼈네!!!')
+    //   document.getElementById('one').style.backgroundColor = 'red';
+    // }
+  $('#two').click(
+      function f() {
+          $('h1:first').html('<mark>h1가 바꼈네!!!</mark>').fadeOut(2000).fadeIn(2000).fadeOut(2000).fadeIn(2000);
+          $('h1:last').text('<mark>h1가 바꼈네!!!</mark>');
+          // $('h1:nth-child(2n)').html('h1 바꼈어11')
+      }
+  )
+  // $('#id') id만 선택
+  // $('.class') class만 선택
+  // $('h1.class') h1에 class의 조합이 된 엘리먼트를 선택
+  // $('h1.classone.classtwo#idone#idtwo')
+
+    // 필터(기본필터, 속성필터, 차일드필터, 컨텐츠필터)
+    // :even
+    // :odd
+    // :first
+    // :last
+    // :nth-child(2)
+    // :nth-child(2n)
+    // etc
+  </script>
+</body>
+</html>

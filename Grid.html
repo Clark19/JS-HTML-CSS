@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Grid System/Layout</title>
+  <style>
+ #grid {
+  display: grid;
+  /* height: 100px; */
+  grid-template-columns: repeat(7, 1fr);
+  /* grid-template-rows: 100px; */
+  gap: 1px;
+  grid-auto-rows: minmax(60px, auto);
+   font-size: 0.6em;
+}
+#item1 {background-color: lime;}
+#item2 {background-color: yellow;grid-column: 2 / 4;}
+#item3 {background-color: blue;grid-column: span 2 / 7;}
+
+    .cel1 { background-color: black;
+    grid-column: span 1}
+    .cel2 { background-color: #00ff00;
+    grid-column: span 1}
+    .cel3 { background-color: blue;
+    grid-column: span 1}
+    .cel4 { background-color: #00ffff;
+    grid-column: span 1}
+    .end { background-color: black;
+      grid-row: 7/8;
+      grid-column: 7 / 8}
+
+    .row1 { background-color: green; height:15px;
+   }
+    .row2 { background-color: red;height:15px;
+    }
+    .row3 { background-color: blue; height:15px;
+    }
+    .row4 { background-color: #00ffff; height:15px;
+    }
+
+
+  </style>
+</head>
+<body>
+
+    <ul>
+      <li>green: 운동</li>
+      <li>레드: 영어</li>
+      <li>파랑: 코딩</li>
+    </ul>
+
+<div id="grid">
+  <div class="cel1">
+    <div class="col1">
+      <div class="row1">P</div>
+      <div class="row2">E</div>
+      <div class="row3">C</div>
+      <div class="row4">기타</div>
+    </div>
+  </div>
+  <div class="cel2">2</div>
+  <div class="cel3">&nbsp</div>
+  <div class="cel4">&nbsp</div>
+  <div class="cel5">5</div>
+  <div class="cel6">6</div>
+  <div class="cel7">7</div>
+<!-- </div>
+
+<div id="grid"> -->
+  <div class="cel1">
+    <div class="col1">
+      <div class="row1">&11</div>
+      <div class="row2">&nbsp</div>
+      <div class="row3">&nbsp</div>
+      <div class="row4">&4</div>
+    </div>
+  </div>
+  <div class="cel2">2</div>
+  <div class="cel3">&nbsp</div>
+  <div class="cel4">&nbsp</div>
+  <div class="cel5">5</div>
+  <div class="cel6">6</div>
+  <div class="cel7">7</div>
+
+  <div class="end">
+    end
+  </div>
+</div>
+<!-- End of Grid   -->
+
+  <header>
+    <h1>Header Tag Area</h1>
+  </header>
+  <nav>
+    <ul>
+      <li>Nav Tag menu</li>
+      <li>Nav Tag menu</li>
+      <li>Nav Tag menu</li>
+    </ul>
+  </nav>
+  <section>
+    <h1>Section Tag</h1>
+    <article>
+      <h1>Article Tag</h1>
+    </article>
+  </section>
+  <aside>
+    <h1>Aside Tag</h1>
+  </aside>
+  <footer>
+    <h1>Footer Tag</h1>
+  </footer>
+
+</body>
+</html>

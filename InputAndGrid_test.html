@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    #grid {
+  display: grid;
+  height: 100px;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: 100px;
+}
+    .cel1 { background-color: red;
+    grid-column: span 1}
+    .cel2 { background-color: #00ff00;
+    grid-column: span 1}
+    .cel3 { background-color: blue;
+    grid-column: span 1}
+    .cel4 { background-color: #00ffff;
+    grid-column: span 1}
+  </style>
+  <script>
+    var a = [1,2,3,4,5];
+    document.write('<br>')
+    document.write(a[0]);
+    document.write('<div id="grid">')
+    document.write('<div class="cel1">1</div>')
+    document.write('<div class="cel2">2</div>')
+    document.write('<div class="cel3">&nbsp</div>')
+    document.write('<div class="cel4">&nbsp</div>')
+    document.write('<div class="cel5">5</div>')
+    document.write('<div class="cel6">6</div>')
+    document.write('<div class="cel7">7</div>')
+    document.write('</div>')
+    document.write('<div class="col1">')
+    document.write('<div class="row1">&1</div>')
+    document.write('<div class="row2">&nbsp</div>')
+    document.write('<div class="row3">&nbsp</div>')
+    document.write('<div class="row4">&4</div>')
+    document.write('</div>')
+  </script>
+</head>
+<body>
+  <input type="text"><br>
+  <input type="password"><br>
+  <input type="date"><br>
+  <input type="time"><br>
+  <input type="range"><br>
+  <input type="color"><br>
+  <input type="radio"><br>
+  <input type="checkbox"><br>
+  <input type="file"><br>
+  <textarea name="" id="" cols="30" rows="10"></textarea>
+
+
+
+</body>
+</html>
