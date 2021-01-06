@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Grid 2</title>
+    <style>
+        .container {
+            margin: 40px;
+            /*   padding: 40px; */
+            width: 400px;
+            display: grid;
+            grid-template-rows: repeat(2, 100px); /* 100px 100px 랑 같은 뜻. 즉, 100픽셀 높이로 2개행 명시적 설정 */
+            grid-template-columns: repeat(3, 1fr); /* 1fr 단위로 3열(너비) 설정 */
+            grid-auto-rows: 100px; /* 명시적 설정 이외의 행에 대해 높이 설정 */
+        }
+
+        .item {background-color: lime}
+        .item:nth-child(1) {
+            grid-column: 1 / 4; /* 1번 4번 라인까지 너비(열) 차지하겠단 설정 */
+            background-color: indianred;
+        }
+
+        .item:nth-child(3) {
+            grid-column: span 2; /* 현재 자신의 라인에서 2개의 너비(열) 차지하겠단 설정 */
+            background-color: gray;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="item">1</div>
+  <div class="item">2</div>
+  <div class="item">3</div>
+  <div class="item">4</div>
+  <div class="item">5</div>
+  <div class="item">6</div>
+</div>
+
+</body>
+</html>
