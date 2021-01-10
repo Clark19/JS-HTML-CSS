@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>모던 웹을 위한 JS + jQuery 입문 3판 실습</title>
+  <script>
+    function log(msg) {
+      console.log(msg)
+    }
+    console.log(typeof 11234)
+
+    const date = new Date()
+    const hour = date.getHours()
+
+    // switch (true) {
+    //   case hour < 12:
+    //     alert('12미만')
+    //     break
+    //   case hour > 12:
+    //     alert('12초과')
+    //     break
+    //   default:
+    //     alert('default')
+    //     break
+    // }
+
+    let rawInput = prompt('숫자를 입력하세요', '숫자')
+    if (rawInput == '')
+      rawInput = NaN
+    const input = Number(rawInput)
+    switch (input % 2) {
+      case 0:
+        alert('짝수')
+        break
+      case 1:
+        alert('홀수')
+        break
+      default:
+        alert('숫자 아님.')
+    }
+    
+    
+  </script>
+
+</head>
+<body>
+  
+</body>
+</html>
