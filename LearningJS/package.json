@@ -4,7 +4,8 @@
   "description": "= Learning JavaScript(러닝 자바스크립트), 3rd Edition\r == Chapter 2: JavaScript Development Tools",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "--mode production"
   },
   "author": "",
   "license": "ISC",
@@ -12,8 +13,25 @@
     "underscore": "^1.12.0"
   },
   "devDependencies": {
-    "babel-preset-es2015": "^6.24.1",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "eslint": "^7.17.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
     "gulp": "^4.0.2",
-    "gulp-babel": "^8.0.0"
+    "gulp-babel": "^8.0.0",
+    "gulp-eslint": "^6.0.0",
+    "husky": "^4.3.7",
+    "lint-staged": "^10.5.3",
+    "prettier": "2.2.1"
+  },
+  "lint-staged": {
+    "*.js": ["eslint . --fix", "prettier --write"]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
