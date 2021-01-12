@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+<!---->
+<script>
+  // 
+  /* */
+  // alert(100000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000 + 100)
+  // let star = ''
+  // for (let i = 1; i < 10; i++) {
+  //   for (let j = 1; j <= i; j++) {
+  //     star += '*'
+  //   }
+  //   star +='\n'
+  // }
+  // console.log(star)
+
+  // const MAXROW = 10
+  // const MAXCOL = 2*MAXROW - 1
+  // let star = ''
+  // for (let row = 1; row <= MAXROW; row++) {
+  //   for (let col = 1; col <= MAXCOL; col++) {
+  //     if (col <= MAXROW-row || col >= MAXROW+row) {
+  //       star += ' '
+  //     } else {
+  //       star += '*'
+  //     }
+  //   }
+  //   star +='\n'
+  // }
+  // console.log(star)
+
+  let output = ''
+  for (let i = 0; i<4; i++) {
+    for (let j=4; j>i; j--) {
+      output += ' ';
+    }
+    for (let k=0; k<2*i-1;k++) {
+      output += '*';
+    }
+    output += '\n';
+  }
+  console.log(output)
+
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

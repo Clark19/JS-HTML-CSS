@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function log(msg) {
+        console.log(msg);
+      }
+      console.log(Array());
+      console.log(Array(5));
+      console.log(Array(1, 2, 3, 4, 5));
+      sumAll(1,2,3,5);
+      function sumAll() {
+        log(typeof (arguments) + ": " + arguments.length);
+      }
+      log(log())
+
+      ///////// < Function 함수 > //////////////
+      /* setInterval(), setTimer() 실습 */
+      const SECOND = 1000
+      // 1초 마다 함수 실행
+      var intervalID = setInterval(function () {
+        log('<p>' + new Date() + '</p>')
+      }, 1*SECOND)
+
+      // run after 3sec : 일정 시간 후 반복 실행 해제(setInterval() 해제)
+      setTimeout(() => clearInterval(intervalID), 3*SECOND)
+
+
+      /* 전개 연산자 */
+      // 화살표 함수(Arrow function, Lambda)에선 자동 생성되는 가변 안자인 arguments를 사용 못하므로,
+      // 전개 연산자인 ...를 사용해야 함. 전개 연산자 ...은 일반 함수에서 사용 가능. arguments 활용보다 좋을 듯!
+      let sumAll2 = (...numbers) => {
+        let output = 0;
+        for (let i =0; i<numbers.length; i++)
+          output += numbers[i]
+        return output
+      }
+
+      let array = [1,2,3,4,5]
+      // ECMASCRIPT 5 방식
+      log('sum1: '+ sumAll2.apply(null, array))
+
+      // ECMASCRIPT 6 방식
+      log('sum2: '+ sumAll2(...array)) // 배열 요소 각각을 풀어서(전개) 전달
+      // 이건 그냥 테스트 해본 것.
+      log('sum3: '+ sumAll2(array)) // 문자열 리턴
+
+      // ES 5의 문제인 var 전역 사용을 자기함수 호출을 사용하여(클로져 함수로) 해결한 코드.
+      for (var i = 0; i < 3; i++) {
+        (function (i) {
+          var btn = document.createElement('button')
+          btn.textContent = i
+          btn.onclick = () => alert(i)
+          document.body.appendChild(btn)
+        })(i);
+      }
+
+      // ES 6는 그냥 var i를 let i로만 바꾸면 된다
+      for (let i = 0; i < 3; i++) {
+        let btn = document.createElement('button')
+        btn.textContent = i
+        btn.onclick = () => alert(i)
+        document.body.appendChild(btn)
+      }
+    </script>
+  </body>
+</html>

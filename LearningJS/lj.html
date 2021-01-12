@@ -1,55 +1,54 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>모던 웹을 위한 JS + jQuery 입문 3판 실습</title>
-  <link rel="stylesheet" href="main.css">
-  <script>
-    function log(msg) {
-      console.log(msg)
-    }
-    console.log(typeof 11234)
-  </script>
-
-</head>
-<body>
-  <canvas id='mainCanvas'></canvas>
-
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.10.2/paper-full.min.js"></script>
-  <script>
-    $(document).ready(function() {
-      'use strict';
-      console.log('js loaded!');
-      paper.install(window)
-      paper.setup(document.getElementById('mainCanvas'))
-
-      // TODO
-      // var c;
-      // for (let x = 25; x < 400; x += 50) {
-      //   for (let y = 25; y < 400; y += 50) {
-      //     c = Shape.Circle(x,y,20)
-      //     c.fillColor = 'green'
-      //   }     
-      // }
-
-      var c = Shape.Circle(200,200,80)
-      c.fillColor = 'black'
-      var text = new PointText(200,200)
-      text.justification = 'center'
-      text.fillColor = 'white'
-      text.fontSize = 20
-      text.content = 'hello js'
-
-      var tool = new Tool();
-      tool.onMouseDown = function(event) {
-        var c = Shape.Circle(event.point,20)
-        c.fillColor = 'green'
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>모던 웹을 위한 JS + jQuery 입문 3판 실습</title>
+    <link rel="stylesheet" href="main.css" />
+    <script>
+      function log(msg) {
+        console.log(msg);
       }
+      console.log(typeof 11234);
+    </script>
+  </head>
+  <body>
+    <canvas id="mainCanvas"></canvas>
 
-      paper.view.draw()
-    });
-  </script>
-</body>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.10.2/paper-full.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        'use strict';
+        console.log('js loaded!');
+        paper.install(window);
+        paper.setup(document.getElementById('mainCanvas'));
+
+        // TODO
+        // var c;
+        // for (let x = 25; x < 400; x += 50) {
+        //   for (let y = 25; y < 400; y += 50) {
+        //     c = Shape.Circle(x,y,20)
+        //     c.fillColor = 'green'
+        //   }
+        // }
+
+        var c = Shape.Circle(200, 200, 80);
+        c.fillColor = 'black';
+        var text = new PointText(200, 200);
+        text.justification = 'center';
+        text.fillColor = 'white';
+        text.fontSize = 20;
+        text.content = 'hello js';
+
+        var tool = new Tool();
+        tool.onMouseDown = function (event) {
+          var c = Shape.Circle(event.point, 20);
+          c.fillColor = 'green';
+        };
+
+        paper.view.draw();
+      });
+    </script>
+  </body>
 </html>
