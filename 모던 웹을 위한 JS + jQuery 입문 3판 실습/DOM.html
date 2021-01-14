@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM 조작 연습</title>
+  <script>
+    window.onload = function() {
+      document.querySelector('h1').style.color = 'red'
+
+      let header = document.createElement('h1')
+      // let textNode = document.createTextNode('Hello pp')
+      // header.appendChild(textNode)
+      // header.textContent = 'Hello pp'
+      header.innerText = 'Hello pp'
+      document.body.appendChild(header)
+      for (let i = 0; i < 3; i++) {
+        header = document.createElement('h1')
+        let text = '<h1>Hello : ' + i + ' index </h1>'
+        
+        // html sanitize
+        text = text.replace(/\</g, '&lt') 
+        text = text.replace(/\>/g, '&gt')
+        header.innerHTML = text
+        document.body.appendChild(header)
+      }
+
+      let image = document.createElement('img')
+      // const attrNode = document.createAttribute('src')
+      // attrNode.value = 'http://placehold.it/300x300'
+      // image.setAttributeNode(attrNode)
+      // image.setAttribute('src', 'http://placehold.it/300x300')
+      image.src = 'http://placehold.it/300x300'
+      document.body.appendChild(image)
+      for (let i = 0; i < 3; i++) {
+        image = document.createElement('img')    
+        image.src = 'http://placehold.it/300x' + (i+1) + '0'
+        document.body.appendChild(image)
+      }
+
+      /* Element(Node) 제거 */
+
+      // 방법 1 : 지울 노드와 부모노드 이용
+      const nodeToRemove1 = document.querySelector("#id_R")
+      nodeToRemove1.style.color = 'green'
+      const parent = document.body
+      // parent.removeChild(nodeToRemove1)
+      
+      // 방법 2: 간단해서 추천 - 지울 노드만 있으면 됨.
+      header.parentNode.removeChild(nodeToRemove1);
+
+      const nodeToRemove2 = document.querySelector("[data-study='r']")
+      const delBtn = document.createElement('button')
+      delBtn.textContent = 'Delete Button'
+      delBtn.onclick = function () {
+        // if (nodeToRemove2 == null) // 작동안함. 이미 지운 엘리먼트 체크는 어찌 해야함?
+        //   return
+        try {
+          nodeToRemove2.parentNode.removeChild(nodeToRemove2)
+        } catch (exception) {
+          if (exception.name == 'TypeError') {
+            console.log(exception.name)
+            console.log(exception.message)
+            console.log(exception.description)
+          }
+         
+        }
+        console.log('익셉션 발생') 
+    
+      }
+      parent.appendChild(delBtn)
+
+      /////////// 예외 처리 형태 ///////////////
+      // if ( ({}).toString.apply(arr[idx]) === '[object Function]' ) {
+      //     arr[idx]();
+      //   }
+
+      // try {
+      //     nodeToRemove2.parentNode.removeChild(nodeToRemove2)
+      // 파일 여는/쓰는 코드, 네트워크를 여는/통신하는 코드 작성 위치
+      // } catch (exception) {
+      //     if (exception.name == 'TypeError') {
+      //       console.log(exception.name)
+      //       console.log(exception.message)
+      //       console.log(exception.description)
+      // } finally {
+      //  파일 닫는 코드, 네트워크를 닫는 코드 작성 위치
+      // }
+      ////////////////////////////
+
+      ///////////////////////
+      // <!-- 엘리먼트 이동 실습 -->
+      const firstDiv = document.getElementById('firstDiv')
+      const h1 = document.querySelector('#firstDiv h1')
+      const secondDiv = document.querySelector('#secondDiv')
+
+      // move
+      secondDiv.appendChild(h1)
+      
+    }
+  </script>
+</head>
+<body>
+  <div id='id_R' data-study="r">Removing Soon!</div>
+  <div data-study="r">When clicked btn, delete Soon!</div>
+  <h1>Process 1</h1>
+  <!-- <script>alert('1')</script> -->
+  <h2>Process 2</h2>
+  <hr />
+
+
+  <!-- 엘리먼트 이동 실습 -->
+  <div id='firstDiv'>
+    <h1>엘리먼트 이동 실습</h1>
+  </div>
+
+  <hr/>
+  <div id='secondDiv'>div</div>
+  <hr/>
+
+  <!-- <script>alert('Last Step')</script> -->
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jQuery 연습</title>
+  <style>
+    .header {
+      text-align: center;
+    }
+    .redText { color: red;}
+  </style>
+  <script src="../js/jquery-3.5.1.js"></script>
+  <script>
+    $(document).ready( function() {
+      /* 객체 접근하는 기본 2가지 코드 형식 */
+      // 1. CSS 선택자: 문서 객체를 선택 : $("h1")
+      $("h1").css("color", "red")
+      $("h1").css("background-color", "orange")
+      $("h1").css("backgroundColor", "orange")
+      $("h1").html("안녕하세요")
+
+      // 2. 문서 객체: 문서 객체를 선택 : $(변수)
+      let header = document.querySelector("h1");
+      $(header).css('color', 'blue')
+      
+      /* 객체 생성하고, 삽입하는 방법 */
+      // 1. 태그 형태의 문자열: 문서 객체를 생성 : $("<h1></h1>")
+      $("<h1>good</h1>").appendTo('body')
+        .css('color', 'red')
+        .html('Changed Text')
+      
+      // 2. DOM 엘리먼트 생성 후 삽입
+      const headerB = document.createElement('h1')
+      // headerB.parentNode.appendChild(headerB)
+
+
+      /* jQuery 조작 함수 4가지
+        html(), text(), css(), attr(), addClass/removeClass
+      */
+      /* setter, getter */
+      // 1. Setter 3가지: jQuery 객체 리턴
+      // A. (문자열, 문자열)
+      $('h1').css('color', 'red')
+      
+      // B. (객체) : 여러 속성을 한꺼번에 지정 가능
+      $('h1').css(
+        {'color': 'blue',
+        'background-color': 'yellow',
+        'textAlign': 'center'
+        }
+      )
+      // 위 소스와 동일
+      $('h1').css({
+        color: 'blue',
+        backgroundColor: 'yellow',
+        textAlign: 'center'
+      })
+
+      // C. 함수로 값을 입력
+      const colors = ['red', 'blue', 'orange']
+      $('h1').css('color', function(index) { return colors[index] })
+      $('h1').css(
+        { 'color': function(index) { return colors[index]} }
+      )
+
+      // 2. Getter: 매개 변수 하나를 생략. 문자열 리턴
+      const colorValue = $('h1').css('color')
+      console.log(colorValue)
+      
+      // 1. Setter
+      $('img').attr('src', 'http://placehold.it/100x100')
+      $('img').attr({
+        src: (idx)=> 'http://placehold.it/100x'+((idx+1)*60),
+        alt: 'test image'
+      })
+      
+      // 2. Getter
+      const test = $('img').attr('src')
+      console.log(test)
+
+      // 1. setter
+      $('h2').html('<img src="http://placehold.it/50x50" />HelloWorld' )
+      $('h2').text('<img src="http://placehold.it/50x50" />HelloWorld' )
+      // $('h2').html( (idx)=> 'Hello World - ' + idx )
+
+      // 2. getter
+      const text = $('h2').text()
+      console.log(text)
+
+      /* 클래스 추가/제거 */
+      // addClass/removeClass == $().attr('class', '')/removeAttr('class')
+      // 토글: toggleClass
+      $('h2').addClass('redText')
+      $('h2').addClass('header')
+      const r1 = $('h2').hasClass('header')
+      const r2 = $('h2').hasClass('blackText')
+
+      $('<h3></h3>').html(r1).appendTo('body')
+      $('<h3></h3>').html(r2.toString()).appendTo('body')
+      $('<h3></h3>').html(r2).appendTo('body')
+
+      $('h3').toggleClass('redText') // 클래스 토글: 생성
+      
+      setTimeout( ()=> {
+        $('h2').removeClass('redText')
+        $('h2').removeClass('header')
+        $('h3').toggleClass('redText') // 클래스 토글: 제거
+        $('h3').remove() // h3 태그들 다 삭제
+      }, 1000*2)
+    })
+  </script>
+</head>
+<body>
+<h1></h1>
+<img src="" alt="">
+<img src="" alt="">
+<img src="" alt="">
+
+<h2></h2>
+<h2></h2>
+<h2></h2>
+
+</body>
+</html>
