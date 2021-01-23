@@ -7,11 +7,6 @@
  - Arrow Function: 전역 객체(웹 브라우저 환경에선 window 객체)
 */
 
-/* Babel 같은 Transfiler 이용시 주의점: 
- 1. 화살표 함수를 단순히 익명함수로 변경하므로 this 사용시 버그 가능성
- 2. let 을 var로 단순히 변경하므로 위의(클로저 부분) var와 비동기 함수 이용시 발생 할 수 있는 버그 발생 가능함.
-*/
-
 /* Arrow Function 사용시 전제 조건:
 1. prototype 사용대신, ES6의 클래스 사용할것
 2. jQuery의 문서 객체 조작에서 this 키워드가 아니라, event.currentTarget을 사용할 것.
@@ -21,6 +16,11 @@ this는 ‘현재’ 요소로, 현재 실행 중인 핸들러가 할당된 요�
 this(event.currentTarget) – <form> 요소에 있는 핸들러가 동작했기 때문에 <form> 요소를 가리킵니다.
 event.target – 폼 안쪽에 실제 클릭한 요소를 가리킵니다.
 https://ko.javascript.info/bubbling-and-capturing
+
+// Babel 같은 Transfiler 이용시 주의점: 
+ 1. 화살표 함수를 단순히 익명함수로 변경하므로 this 사용시 버그 가능성
+ 2. let 을 var로 단순히 변경하므로 위의(클로저 부분) var와 비동기 함수 이용시 발생 할 수 있는 버그 발생 가능함.
+
 */
 
 /* 함수를 정의 하면 자동으로 arguments, prototype 이란 객체가 만들어진다.
@@ -97,9 +97,10 @@ Square.prototype = Rectangle.prototype;
 Square.prototype.constructor = Square;
 
 let s = new Square(5);
-const j = require("../js/JinLib");
-console.log(j.Jin.trueType(s));
 console.log(s instanceof Rectangle);
+
+const { Jin } = require("../js/JinLib");
+console.log(Jin.trueType(s));
 
 // ES6 Class 문법 연습
 

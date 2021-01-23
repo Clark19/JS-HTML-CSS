@@ -19,3 +19,4 @@ Jin.trueType = function (obj) {
 
 exports.Jin = Jin;
 // exports = module.exports = Jin
+// export default Jin;
