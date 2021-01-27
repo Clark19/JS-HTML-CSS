@@ -29,6 +29,13 @@ app.get("/members", (req, res) => {
   });
 });
 
+app.get("/projects", (req, res) => {
+  const sql = "select * from projects";
+  db.query(sql, (err, data) => {
+    res.json(data);
+  });
+});
+
 http.createServer(app).listen(3000, () => {
   console.log("server on : 3000 port");
 });
