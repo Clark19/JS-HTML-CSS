@@ -5,7 +5,7 @@ let upload = multer({ dest: "./uploads/" });
 let app = express();
 
 app.get("/single", (req, res) => {
-  fs.readFile("NodeJS/single.html", "utf8", (err, data) => {
+  fs.readFile("NodeJS/UploadSingle.html", "utf8", (err, data) => {
     res.writeHead(200, { "Content-Type": "text/html" });
     res.end(data);
   });
@@ -18,5 +18,5 @@ app.post("/singleupload", upload.single("file"), (req, res) => {
 });
 
 app.listen(3000, () => {
-  console.log("server on 3000 port");
+  console.log("server on http://localhost:3000 port");
 });
