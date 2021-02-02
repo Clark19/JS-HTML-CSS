@@ -73,7 +73,7 @@ app.get("/members", async (req, res) => {
     let result = await userFindById(userId);
     res.json(result);
   } catch (error) {
-    console.log(err);
+    console.log(error);
     res.status(500).json({ message: `error 발생` });
   }
 });
