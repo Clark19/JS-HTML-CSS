@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <div class="local-login">
+        <form action="/login" method="POST">
+            id : <input type="text" name="id" />
+            password : <input type="password" name="password" />
+            <button type="submit">login</button>
+        </form>
+    </div>
+
+    <div class="facebook-login">
+        <form action="/fblogin/facebook" method="GET">
+            <button type="submit">facebook login</button>
+        </form>
+    </div>
+
+    <!-- <fb:login-button 
+  scope="public_profile,email"
+  onlogin="checkLoginState();">
+</fb:login-button> -->
+
+
+    <div class="logout">
+        <form action="/logout" method="POST">
+            <button type="submit">logout</button>
+        </form>
+    </div>
+
+    <div class="go">
+          <button onclick="go2()">go</button>
+    </div>
+
+    <p id='demo'></p>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '255379222636637',
+        cookie     : true,
+        xfbml      : true,
+        version    : 'v9.0'
+      });
+        
+      FB.AppEvents.logPageView();   
+        
+    };
+  
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "https://connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+
+     function checkLoginState() {
+  FB.getLoginStatus(function(response) {
+    // statusChangeCallback(response);
+    FB.login()
+  });
+}
+
+let url = "http://127.0.0.1:3000/login";
+async function go() {
+await axios.post(url, {});
+}
+
+function go2() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     document.getElementById("demo").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("POST", "/login", true);
+  xhttp.send();
+}
+
+
+  </script>
+</body>
+</html>
