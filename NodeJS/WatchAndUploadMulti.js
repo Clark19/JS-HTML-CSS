@@ -2,9 +2,9 @@ const fs = require("fs");
 const FormData = require("form-data");
 const axios = require("axios");
 
-let url = "http://127.0.0.1:3000/multiupload";
-let isOverlap = false;
+// let url = "http://127.0.0.1:3000/multiupload";
 const PATH = "NodeJS/watch/";
+let url = "http://192.168.219.151:3000/multiupload";
 
 let statWatcher = fs.watchFile(PATH, async (curStat, prevStat) => {
   let files = await fs.promises.readdir(PATH);
@@ -27,18 +27,16 @@ function uploadFileP(files) {
         headers: {
           ...formData.getHeaders(),
           "Content-Length": formData.getLengthSync(),
-          apikey: "apikey",
-          host: "hosts",
         },
         maxContentLength: Infinity,
         maxBodyLength: Infinity,
       });
-      console.log(`result status: ${result.status}`);
+      console.log(
+        `result status: ${result.status} - if 204 is perhaps success.`
+      );
     } catch (err) {
       console.log("Error!!: " + err);
       reject(err);
-    } finally {
-      isOverlap = false;
     }
   });
 }
