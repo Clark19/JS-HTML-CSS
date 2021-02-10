@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Node.js & express on Docker",
   "author": "Clark Gable <tonawa@daum.net>",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "dev": "nuxt",
     "start": "node server.js"
