@@ -104,14 +104,36 @@ function updateMySportRecord() {
     if (date.children[0].innerText == today.getDate()) {
       console.log(trueType(+date.innerText));
       console.log(trueType(date.children[0].innerText));
-      const ele = document.createElement("div");
 
-      // 텍스트를 -> 라인으로 바꿀 것. 페이지 갱신되도 유지되게 할것
-      const textNode = document.createTextNode("조깅/등산 기록 갱신.");
+      let recordKind = "운동";
+      addRecord(date, recordKind);
+      addRecord(date, "코딩");
 
-      ele.appendChild(textNode);
-      date.appendChild(ele);
       break;
     }
   }
+}
+
+function addRecord(date, recordKind) {
+  const ele = document.createElement("div");
+  // 텍스트를 -> 라인으로 바꿀 것. 페이지 갱신되도 유지되게 할것
+  // ele.classList.add("recordGoal");
+
+  let bgColorClass;
+  switch (recordKind) {
+    case "운동":
+      bgColorClass = "sport";
+      break;
+    case "코딩":
+      bgColorClass = "coding";
+      break;
+
+    default:
+      break;
+  }
+  ele.classList.add("recordGoal", bgColorClass);
+
+  const textNode = document.createTextNode(recordKind);
+  ele.appendChild(textNode);
+  date.appendChild(ele);
 }

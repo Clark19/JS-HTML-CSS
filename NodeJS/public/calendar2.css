@@ -108,3 +108,17 @@ body {
   transform: translate(-50%, -50%);
   content: "";
 }
+
+.recordGoal {
+  color: #ffffff;
+  font-size: x-small;
+  text-align: left;
+}
+
+.sport {
+  background-color: gray;
+}
+
+.coding {
+  background-color: blue;
+}

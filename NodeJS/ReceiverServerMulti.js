@@ -73,10 +73,14 @@ let io = socket(server, {
 app.set("io", io); // express app 객체에 io를 저장해두고, 나중에 req.app.get('io')로 사용할 수 있음.
 
 app.get("/", (req, res) => {
-  fs.readFile("public/socketClient.html", "utf8", (err, data) => {
-    res.writeHead(200, { "Content-Type": "text/html" });
-    res.end(data);
-  });
+  fs.readFile(
+    "public/GoalTracker_Socket_Calendar.html",
+    "utf8",
+    (err, data) => {
+      res.writeHead(200, { "Content-Type": "text/html" });
+      res.end(data);
+    }
+  );
 });
 
 function makeHtml(req) {
