@@ -138,7 +138,7 @@
 
     $('button').click(function() {
       $.ajax({
-        url: '/data.xml',
+        url: 'http://park9.mooo.com:3000/data.xml',
         success: function(data, textStatus, xhr) {
           // console.log(data)
           $(data).find('product').each(function() {
@@ -152,7 +152,7 @@
     })
 
     $.ajax({
-      url: '/data.json',
+      url: 'http://park9.mooo.com:3000/data.json',
       success: function(data, textStatus, xhr) {
         // console.log(data)
         data.forEach(item => {
