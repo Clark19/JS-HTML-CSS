@@ -6,20 +6,14 @@ const fs = require("fs");
 
 // 서버
 const app = express();
-
-const cors = require("cors");
-app.use(cors());
-
 // 미들웨어를 설정합니다.
 app.use(morgan("combined"));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static("public"));
 
-// const PORT = 8080;
+const PORT = 8080;
 const HOST = "localhost";
-const PORT = 3000;
-
 let items = [
   { name: "우유", price: "2000" },
   { name: "홍차", price: "5000" },
