@@ -30,3 +30,12 @@ ul li a {
   color: white;
   text-decoration: none;
 }
+
+.toggle {
+  width: 100px;
+  padding: 10px 20px;
+  background: #001f44;
+  text-align: right;
+  box-sizing: border-box;
+  color: blueviolet;
+}
