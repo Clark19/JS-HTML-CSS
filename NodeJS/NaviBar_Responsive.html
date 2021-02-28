@@ -11,9 +11,9 @@
 <body>
   <nav>
     <div class="toggle">
-      <i class="fa fa-bars" aria-hidden="true"></i>
+      <i class="fa fa-bars navBar" aria-hidden="true"></i>
     </div>
-    <ul>
+    <ul id='idMenu'>
       <li>
         <a href="#">Home</a>
       </li>
@@ -28,5 +28,16 @@
       </li>
     </ul>
   </nav>
+
+  <script>
+    window.onload = () => {
+      const navEle = document.getElementsByClassName('navBar')
+      navEle[0].onclick = () => {
+        const ele = document.getElementsByTagName('ul')
+        ele[0].classList.toggle('active')
+      }
+    }
+
+  </script>
 </body>
 </html>
