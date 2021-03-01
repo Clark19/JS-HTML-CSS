@@ -102,6 +102,7 @@ function updateMySportRecord() {
   const dates = document.querySelectorAll(".dates > .date");
   for (let date of dates) {
     if (date.children[0].innerText == today.getDate()) {
+      console.log("날짜:", +date.innerText);
       console.log(trueType(+date.innerText));
       console.log(trueType(date.children[0].innerText));
 
