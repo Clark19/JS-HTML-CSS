@@ -1,0 +1,77 @@
+<!-- 출처: 책 'Do it! HTML+CSS+자바스크립트 웹 표준의 정석' -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>자바스크립트로 구구단 만들기</title>
+
+  <style>
+    /* body{display: flex;} */
+    div {
+      display: inline-block;
+      padding: 0 20px 30px 20px;
+      margin: 15px;
+      border: 1px solid #ccc;
+      line-height: 2;
+    }
+    div h3 {
+      text-align: center;
+      font-weight: bold;
+    }
+    table, td { border: 1px solid #777; 
+      border-collapse: collapse; }
+    td { padding: 5px; font-size: 0.9em; text-align: center;}
+  </style>
+</head>
+
+<body>
+  <h1>JavaScript 연습 - 출처: 책 'Do it! HTML+CSS+자바스크립트 웹 표준의 정석'</h1>
+  <h2>구구단 - Ch.14</h2>
+
+
+  <script>
+    for (let i=2; i<=9; i++) {
+      document.write("<div>");
+      document.write("<h3>" + i + "단</h3>");
+      for (let j=1; j<=9; j++) {
+        document.write(`${i} x ${j} = ${i*j}<br>`);
+      }
+      document.write("</div>");
+    }
+
+    const userNum = 5;
+    let n = userNum;
+    let sum = 1;
+    while(n) {
+      sum *= n--;
+    }
+    console.log(`${n}! = ${sum}`);
+    document.write('<br><br>');
+
+
+    document.write('<h2>좌석 번호 매기기</h2>');
+    let memNum = 41;//parseInt(prompt('입장객은 몇 명인가요?', 41));
+    let colNum = 7;//parseInt(prompt('한 줄에 몇 명씩 앉습니까?', 7));
+    let rowNum = 1;
+    if ( memNum % colNum === 0 )
+      rowNum = parseInt(memNum/colNum);
+    else
+      rowNum = parseInt(memNum/colNum) + 1;
+    let seatNo = 0;
+    document.write(`<table>`)
+    for (let i=0; i<rowNum; i++) {
+      document.write(`<tr>`)
+      for (let j=1; j<=colNum; j++) {
+        seatNo = i * colNum + j;
+        if (seatNo > memNum) break;
+        document.write(`<td>좌석${seatNo}</td>`)
+      }
+      document.write('</tr>');
+    }
+    document.write(`</table>`)
+  </script>
+  
+</body>
+</html>
