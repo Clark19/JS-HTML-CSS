@@ -12,7 +12,7 @@
     div {
       display: inline-block;
       padding: 0 20px 30px 20px;
-      margin: 15px;
+      margin: 5px;
       border: 1px solid #ccc;
       line-height: 2;
     }
@@ -28,6 +28,24 @@
 
 <body>
   <h1>JavaScript 연습 - 출처: 책 'Do it! HTML+CSS+자바스크립트 웹 표준의 정석'</h1>
+
+  <section id="btns">
+    <h2>배경 색상 변경 버튼</h2>
+    <ul>
+      <li>Green</li>
+      <li>Orange</li>
+      <li>Purple</li>
+    </ul>
+    <style>
+      ul{list-style: nonoe;}
+      ul li{display: inline-block; border:1px solid #777; border-radius: 7px;
+        padding:7px; }
+      ul li:hover { cursor: pointer; }
+      /* ul li:active { } */
+    </style>
+  </section>
+  
+
   <h2>구구단 - Ch.14</h2>
 
 
@@ -71,6 +89,77 @@
       document.write('</tr>');
     }
     document.write(`</table>`)
+
+    // 호이스팅 예제 (hoisting : 끌어올린다라는 뜻) - 실제 소스 코드를 끌어올린다는 것이 아니고 그런 식으로 해석한다는 의미
+    let x = 10
+    function fn1() {
+      console.log('x=' + x)
+      console.log(y)
+      var y = 20; // 호이스팅이 일어나는 문
+    }
+    fn1();
+
+    
+    document.querySelectorAll('ul li').forEach( item => {
+      item.onclick = function() {
+        document.body.style.backgroundColor = this.innerHTML.toLowerCase();
+      }
+      item.onmouseover = function() {
+        this.style.backgroundColor = this.innerHTML.toLowerCase();
+      }
+      item.onmouseleave = function() {
+        this.style.backgroundColor = 'inherit';
+      }
+    });
+
+
+    // 15장 마무리 문제 1번
+    const n1 = 5;//parseInt(prompt('number? : ', 5))
+    const n2 = 10;//parseInt(prompt('number? : ', 10))
+    function sumMulti(n1, n2) {
+        return n1 === n2 ? n1*n2 : n1 + n2; // 조건 연산자 == 삼항연산자
+    }
+    console.log(sumMulti(n1, n2));
+
+    // Array 객체의 메서드
+    let nums = [1,2,3]
+    let chars = ['a','b','c','d']
+    // concat() : immutable. concat()으로 합쳐진 배열은 기존 배열에 영향을 주지 않고 새로운 배열을 만든다.
+    const numsChars = nums.concat(chars)
+    const charsNums = chars.concat(nums)
+    console.log(numsChars, charsNums)
+    console.log(numsChars.join('/'))
+
+    console.log('before: '+nums)
+    // unshift(), push() 하면 원래 배열이 바뀌다고 함. mutable
+    nums.unshift(-1, 0);// 맨앞에 넣음
+    let ret1 = nums.push(4,5);// 맨뒤에 넣음
+    console.log('after nums : '+nums)
+    console.log(ret1)
+
+    // shift():맨앞에서 뺌, pop():맨뒤에서 뺌. mutable
+    nums.shift()
+    console.log('shift() : '+nums)
+    nums.pop()
+    console.log('pop() : ' +nums)
+
+    // splice(): mutable. 중간 원하는 지점에 원하는 만큼 빼내 반환, 그자리에 새 요소들 추가도 가능. 원형 인스턴스 변경됨.
+    let study = ['html', "css", 'web', 'jquery']
+    console.log(`study: [${study.join()}]`)
+    let newStudy = study.splice(2,1)
+    console.log(`.splice(2,1) => study: [${study.join(',')}] => newStudy: ${newStudy}`)
+    study.splice(2,1,'js')
+    console.log(`.splice(2,1,'js') => study: [${study.join()}]`)
+
+    // slice(): immutable. 원하는 지점의 원소를 빼내지만, 원형 인스턴스는 변경 안됨.
+    let colors = ['red', 'green', 'blue', 'white', 'black']
+    console.log(`colors: [${colors.join()}]`)
+    let colors2 = colors.slice(2,4)
+    console.log(`colors: [${colors.join()}]`)
+    console.log(`colors2: [${colors2.join()}]`)
+    
+
+
   </script>
   
 </body>
