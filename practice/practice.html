@@ -15,6 +15,10 @@
   <link rel="stylesheet" href="practice.css">
   <script src='practice.js' defer></script>
 
+  <style>
+    #closeWindow { position: fixed; right: 0; bottom: 0; }
+  </style>
+
 </head>
 
 <body>
@@ -56,12 +60,19 @@
       <div class="flex-item">5</div>
     </div>
 
-
+    <!-- 여기서 this는 클릭이벤트가 발생한 대상, a 요소 객체를 가리킴.
+          return false는 링크 클릭에대한 기본 동작(링크를 연결하는 것)을 취소한다는 뜻  -->
+    <p><a href="practice.html" onclick="loadURL(this.href);return false;">메인 창에서 자세히 보기</a></p>
+    <button id='closeWindow'>닫기</button>
 
 
 
     <script>
-
+      function loadURL(url) {
+        window.creator.location.href = url;//부모 창(creator)의 location에 url을 넘김 => 메인창에서 새페이지가 뜸
+        window.close(); // 현재창(팝업창) 닫기
+      }
+      document.querySelector('#closeWindow').addEventListener('click', ()=>close())
     </script>
 
 
