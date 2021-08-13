@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Socke 테스트 Client</title>
+  <link rel="stylesheet" href="calendar2.css">
+</head>
+<body>
+  
+  <p>소켓 아이오 테스트</p>
+  <div id="output"></div>
+  <!-- <div id="calendar"></div> -->
+
+  <div class="calendar">
+    <div class="header">
+        <div class="year-month"></div>
+        <div class="nav">
+<button class="nav-btn go-prev" onclick="prevMonth()">&lt;</button>
+<button class="nav-btn go-today" onclick="goToday()">Today</button>
+<button class="nav-btn go-next" onclick="nextMonth()">&gt;</button>
+</div>
+    </div>
+    <div class="main">
+        <div class="days">
+            <div class="day">일</div>
+            <div class="day">월</div>
+            <div class="day">화</div>
+            <div class="day">수</div>
+            <div class="day">목</div>
+            <div class="day">금</div>
+            <div class="day">토</div>
+        </div>
+        <div class="dates"></div>
+    </div>
+</div>
+
+<!-- Calendar -->
+<script src="calendar2.js"></script>
+
+<!-- <script src="/socket.io/socket.io.js"></script> // 이건 서버사이드 렌더링시 사용  -->
+<script src="https://cdn.socket.io/3.1.1/socket.io.min.js"></script>
+<script>
+  let URL =  "ws://localhost:3000";
+  // let URL =  "ws://park9.mooo.com:3000";
+  // let URL =  "ws://park9.duckdns.org:3000";
+  var output = document.getElementById('output')
+  
+  // 네임스페이스를 제외하고 싶다면, 안의 값을 지워주세요. 기본값 설정은 '/'입니다.
+  let socket = io(URL + '/chatChannel');
+  // socket.join('room1');
+  socket.on('join', msg => {
+    console.log('socket.on 안: 서버로 부터 온 메시지는? :' +msg)
+    if (msg == 'Refresh') {
+      updateMySportRecord()
+    }
+  })
+  socket.emit('join', '브라우저 소켓이 서버에게 보낸다')
+
+
+
+
+  // webSocketInit();
+
+  function webSocketInit(ws) {
+    
+    ws.onopen = onOpen;
+    ws.onclose = onClose;
+    ws.onmessage = onMsg;
+    ws.onerror = onError;
+  };
+
+  function onOpen(evt) {
+    console.log('ws.readyState : '+ws.readyState , 'ws.protocol:'+ws.protocol)
+      writeToScreen('연결완료')
+      doSend('테스트 메시지')
+  }
+  function onClose(evt) {
+    writeToScreen('연결해제')
+  }
+  function onMsg(evt) {
+    writeToScreen('<span style="color: blue;">수신: ' + evt.data + '</span>')
+    // ws.close()
+  }
+  function onError(evt) {
+    writeToScreen('<span style="color: red;">에러:</span>' + evt.data )
+  }
+
+  function doSend(msg) {
+    writeToScreen('발신:'+msg)
+    ws.send(msg)
+  }
+
+  function writeToScreen(msg) {
+    let pre = document.createElement('p');
+    pre.style.wordWrap = 'break-word';
+    pre.innerHTML = msg;
+    output.appendChild(pre);
+  }
+
+
+</script>
+
+</body>
+</html>

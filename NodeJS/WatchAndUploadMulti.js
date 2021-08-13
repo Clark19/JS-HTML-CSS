@@ -3,7 +3,7 @@ const FormData = require("form-data");
 const axios = require("axios");
 
 // let url = "http://127.0.0.1:3000/multiupload";
-const PATH = "NodeJS/watch/";
+const PATH = "watch/";
 let url = "http://192.168.219.151:3000/multiupload";
 
 let statWatcher = fs.watchFile(PATH, async (curStat, prevStat) => {

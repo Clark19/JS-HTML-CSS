@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+
+
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="practice.css">
+  <script src='practice.js' defer></script>
+
+  <style>
+    #closeWindow { position: fixed; right: 0; bottom: 0; }
+  </style>
+
+</head>
+
+<body>
+  <h1>자바스크립트 프로젝트북 예제 연습</h1>
+
+  <label for="nick">nickname</label>
+  <input type="text" id="nick">
+
+  <ul>
+    <li onclick="alert('망멍');">Dog</li>
+    <li>cow</li>
+    <li>Chicken</li>
+    <li onclick="alert('Miyawoo~');">Cat</li>
+  </ul>
+
+  <h2>CSS animation and JavaScript Animation</h1>
+    <hr>
+    <div class="aniDiff" id='box1'>css Animation</div>
+    <div class='aniDiff' id="box2">javascript Animation</div>
+    <div class="aniDiff" id='box3'>css tr ani test</div>
+
+    <h2>객관식 퀴즈 구현 예. switch & js 이용</h2>
+    <H3>문제: 다음 중 웹 표준 언어가 아닌 것은?</H3>
+    <ol>
+      <li value=1>HTML</li>
+      <li value=2>CSS</li>
+      <li value=3>JAVA</li>
+      <li value=4>JavaScript</li>
+    </ol>
+    <div id="quizResult"></div>
+
+
+    <!-- Flex Box -->
+    <div class="flex-container">
+      <div class="flex-item">1</div>
+      <div class="flex-item">2</div>
+      <div class="flex-item">3</div>
+      <div class="flex-item">4</div>
+      <div class="flex-item">5</div>
+    </div>
+
+    <!-- 여기서 this는 클릭이벤트가 발생한 대상, a 요소 객체를 가리킴.
+          return false는 링크 클릭에대한 기본 동작(링크를 연결하는 것)을 취소한다는 뜻  -->
+    <p><a href="practice.html" onclick="loadURL(this.href);return false;">메인 창에서 자세히 보기</a></p>
+    <button id='closeWindow'>닫기</button>
+
+
+
+    <script>
+      function loadURL(url) {
+        window.creator.location.href = url;//부모 창(creator)의 location에 url을 넘김 => 메인창에서 새페이지가 뜸
+        window.close(); // 현재창(팝업창) 닫기
+      }
+      document.querySelector('#closeWindow').addEventListener('click', ()=>close())
+    </script>
+
+
+</body>
+
+</html>

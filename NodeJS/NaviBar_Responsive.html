@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>REsponsive menu</title>
+  <link rel="stylesheet" href="style.css" type="text/css" >
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  </head>
+<body>
+  <nav>
+    <div class="toggle">
+      <i class="fa fa-bars navBar" aria-hidden="true"></i>
+    </div>
+    <ul id='idMenu'>
+      <li>
+        <a href="#">Home</a>
+      </li>
+      <li>
+        <a href="#">Abouts</a>
+      </li>
+      <li>
+        <a href="#">Services</a>
+      </li>
+      <li>
+        <a href="#">Contact</a>
+      </li>
+    </ul>
+  </nav>
+
+  <script>
+    window.onload = () => {
+      const navEle = document.getElementsByClassName('navBar')
+      navEle[0].onclick = () => {
+        const ele = document.getElementsByTagName('ul')
+        ele[0].classList.toggle('active')
+      }
+    }
+
+  </script>
+</body>
+</html>

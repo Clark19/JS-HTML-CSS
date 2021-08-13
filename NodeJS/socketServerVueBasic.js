@@ -1,3 +1,6 @@
+/* nuxt의 page/index.vue 파일과 소켓통신을 
+하기위한 express socket.io 서버.
+ */
 const express = require("express");
 let app = express();
 // const cors = require("cors");
@@ -19,6 +22,7 @@ server.listen(3001, () => {
 });
 
 let chat = io.of("/chat").on("connection", (socket) => {
+  //  let chat = io.sockets.on("connection", (socket) => {
   socket.on("everyBodySend", (msg) => {
     // 클라이언트 이벤트 받기
     // io.emit("everyBodySend", msg) // 모든 소켓에 이벤트 전달

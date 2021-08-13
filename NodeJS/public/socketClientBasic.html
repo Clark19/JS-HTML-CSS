@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <input type="text" name="" id="text">
+  <p>소켓 아이오 테스트33</p>
+  <div id="output"></div>
+
+<!-- <script src="/socket.io/socket.io.js"></script> // 이건 서버사이드 렌더링시 사용 -->
+<script src="https://cdn.socket.io/3.1.1/socket.io.min.js"></script> <!-- 이 부분은 CSR시 사용 -->
+
+<script>
+  var URL =  "ws://localhost:3000";
+  var output;
+  
+  var socket = io(URL + '/namespace');
+  // 네임스페이스를 제외하고 싶다면, 안의 값을 지워주세요. 기본값 설정은 '/'입니다.
+  // socket.join('abc');
+
+  socket.on('hi', data => {
+    console.log('hi: ' + data);
+    socket.emit('hihi', '안녕, 나는 클라이언트야.');
+  });
+  
+  socket.on('join', data => {
+    console.log('join data: ' + data);
+    console.log(`${data} socket이 방에 참여했습니다.`);
+  });
+    
+
+</script>
+</body>
+</html>
