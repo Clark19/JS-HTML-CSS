@@ -90,6 +90,17 @@
   <button onclick="location.assign('http://www.easyspub.co.kr/20_Menu/BookView/228/EDU')">이지스퍼블리싱 홈페이지로 이동</button>
   <!-- location.replace()사용하면 뒤로가기가 안되서 불편 함. -->
 
+  <section id="section_imgChange">
+    <div id="prod-pic">
+      <img src="images/coffee-pink.jpg" alt="커피 사진" id='cup' width="200" height='200' onclick='displaySrc()'>
+      <div id="small-pic">
+        <img src="images/coffee-pink.jpg" alt="" class="small">
+        <img src="images/coffee-blue.jpg" alt="" class="small">
+        <img src="images/coffee-gray.jpg" alt="" class="small">
+      </div>
+    </div>
+  </section>
+
 
   <script>
     // 구구단
@@ -265,6 +276,19 @@
       document.querySelector('#timePopSection').style.display = 'none';
     }
     
+
+    // html element의 속성 접근하고 속성 값 변경하기
+    // 상단 이미지 클릭시 이미지 소스 알림.
+    function displaySrc() {
+      alert('이미지 소스: ' + document.querySelector('#cup').getAttribute('src'))
+    }
+    
+    // 하단 이미지 클릭시 상단 영역의 이미지를 클릭한 이미지로 바꾸기
+    document.querySelectorAll('#small-pic img').forEach(item => {
+      item.onclick = function() {
+        document.querySelector('#cup').setAttribute('src', this.src)
+      }
+    });
   </script>
   
 </body>
