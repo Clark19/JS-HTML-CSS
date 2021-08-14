@@ -113,6 +113,7 @@
         border: 2px double #222;
         background-color: #d8f0fc;
         text-align: center;
+        transition: .5s;
       }
 
       h1 {
@@ -140,6 +141,44 @@
         <img src="images/coffee-gray.jpg" alt="" class="small">
       </div>
     </div>
+
+    <!-- 이미지 라이트 박스 - 레이어드 팝업과 유사 -->
+    <div class="row">
+      <h2>이미지 라이트 박스</h2>
+      <ul>
+        <li><img src="images/tree-3-thumb.jpg" data-src="images/tree-3.jpg" class="pic"></li>
+        <li><img src="images/tree-4-thumb.jpg" data-src="images/tree-4.jpg" class="pic"></li>
+        <li><img src="images/tree-6-thumb.jpg" data-src="images/tree-6.jpg" class="pic"></li>
+      </ul>
+    </div>
+    <div id="lightbox">
+      <img src="images/coffee-pink.jpg" alt="" id='lightboxImage'>
+    </div>
+    <style>
+      /* 라이트 박스 스타일 */
+      #lightbox {
+        position: fixed;
+        /* 위치 고정 */
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, .7);
+        top: 0;
+        left: 0;
+        display: none;
+      }
+
+      /* 라이트 박스 안의 이미지 */
+      #lightbox img {
+        position: absolute;
+        /* top, left에 의한 위치 지정 */
+        top: 50%;
+        /*  top/left에서 50% 수치는 페이지 크기의 50%인듯 */
+        left: 50%;
+        transform: translate(-50%, -50%);
+        /* 요소를 화면 중앙에 표시하기 위해 이동: -50% 수치는 img 엘리먼트 자체 크기에서 50%인듯 */
+        border: 5px solid #eee;
+      }
+    </style>
   </section>
 
 
@@ -263,6 +302,16 @@
     console.log('passedTime: ' + passedTime)
     console.log('days: ' + days)
     document.querySelector('#result').innerHTML = days;
+    document.getElementById('bookdate').onmouseover = function () {
+      this.style.borderRadius = '10px';
+      this.style.backgroundColor = "green";
+    }
+    document.getElementById('bookdate').onmouseout = function () {
+      this.style.borderRadius = ''; //테두리 원래 값으로 지정
+      this.style.backgroundColor = ''; //원래 값으로 지정
+
+    }
+
 
     // 당첨자 뽑기 : 100명중 랜덤 숫자 뽑기 = 1 ~ 100번
     const numOfPerson = 100;
@@ -328,25 +377,30 @@
       console.log('이미지 소스: ' + document.querySelector('#cup').getAttribute('src'));
       document.getElementById('cup').onclick = event => alert(
         `event type: ${event.type}, event location: ${event.pageX}, ${event.pageY}, screenXY: ${screenX}, ${screenY} scrollXY: ${scrollX}, ${scrollY}`
-        )
+      )
     }
 
-    // 하단 이미지 클릭시 상단 영역의 이미지를 클릭한 이미지로 바꾸기
+    // 하단 이미지 마우스 포인터 위치시 상단 영역의 이미지 바꾸기
     document.querySelectorAll('#small-pic img').forEach(item => {
-      // item.onclick = function() {
-      //   document.querySelector('#cup').setAttribute('src', this.src)
-      // }
-      item.addEventListener('mouseover', changePic); // 포인터를 올리면 changePic
-      item.addEventListener('mouseout', originPic);
+      item.addEventListener('mouseover', function () {
+        document.querySelector('#cup').setAttribute('src', this.src);
+      }); // 포인터를 올리면 change Picture
+      item.addEventListener('mouseout', () => document.querySelector('#cup').setAttribute('src',
+        'images/coffee-pink.jpg'));
     });
 
-    function changePic() {
-      document.querySelector('#cup').setAttribute('src', this.src);
+    // 이미지 라이트 박스 - 썸네일 클릭시 레이어드 전체 팝업에 큰 이미지의 본 파일 보여주기
+    // 작은 사이즈의 thumbnail 이미진 src 속성 이용, 큰 사이즈 경로는 data-src 속성 이용해 이미지 보여주는 방식
+    const pics = document.getElementsByClassName('pic');
+    for (let i = 0; i < pics.length; i++) {
+      pics[i].addEventListener('click', function () {
+        document.querySelector('#lightbox').style.display = 'block';
+        document.querySelector('#lightbox img').src = this.getAttribute('data-src');
+      });
     }
-
-    function originPic() {
-      document.querySelector('#cup').setAttribute('src', 'images/coffee-pink.jpg');
-
+    // 라이트 박스 클릭시, 라이트박스 닫기
+    document.getElementById('lightbox').onclick = function () {
+      this.style.display = 'none';
     }
   </script>
 
