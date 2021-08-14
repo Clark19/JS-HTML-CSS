@@ -1,6 +1,7 @@
 <!-- 출처: 책 'Do it! HTML+CSS+자바스크립트 웹 표준의 정석' -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,13 +17,23 @@
       border: 1px solid #ccc;
       line-height: 2;
     }
+
     div h3 {
       text-align: center;
       font-weight: bold;
     }
-    table, td { border: 1px solid #777; 
-      border-collapse: collapse; }
-    td { padding: 5px; font-size: 0.9em; text-align: center;}
+
+    table,
+    td {
+      border: 1px solid #777;
+      border-collapse: collapse;
+    }
+
+    td {
+      padding: 5px;
+      font-size: 0.9em;
+      text-align: center;
+    }
   </style>
 </head>
 
@@ -37,14 +48,26 @@
       <li>Purple</li>
     </ul>
     <style>
-      ul{list-style: nonoe;}
-      ul li{display: inline-block; border:1px solid #777; border-radius: 7px;
-        padding:7px; }
-      ul li:hover { cursor: pointer; }
+      ul {
+        list-style: nonoe;
+      }
+
+      ul li {
+        display: inline-block;
+        border: 1px solid #777;
+        border-radius: 7px;
+        padding: 7px;
+      }
+
+      ul li:hover {
+        cursor: pointer;
+      }
+
       /* ul li:active { } */
     </style>
   </section>
-  
+
+  <!-- (레이어드)팝업창 연습  -->
   <section id="currentTime">
     <p>현재 시각 <span id="current" class="display"></span></p>
     <button id="btn_time">현재시각 팝업창</button>
@@ -53,10 +76,25 @@
       <button id='btn_closeTime'>닫기</button>
     </section>
     <style>
-      #currentTime p{margin-top:20px; font-size:1.2em; text-align: center;}
-      #currentTime .display{font-size:1.5em; font-weight:bold; color:blue;}
-      #timePopSection { display: none; position:absolute;
-        z-index: 5; border: 1px solid #777; background: #777;}
+      #currentTime p {
+        margin-top: 20px;
+        font-size: 1.2em;
+        text-align: center;
+      }
+
+      #currentTime .display {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: blue;
+      }
+
+      #timePopSection {
+        display: none;
+        position: absolute;
+        z-index: 5;
+        border: 1px solid #777;
+        background: #777;
+      }
     </style>
   </section>
 
@@ -67,22 +105,24 @@
     <p><span class="accent" id="result"></span>일 연속으로 <br> 책 읽기를 달성했군요.</p>
     <p>축하합니다!</p>
     <style>
-      #bookdate{
-        margin:50px auto;
-        width:300px;
-        height:300px;
-        border-radius:50%;
-        border:2px double #222;
-        background-color:#d8f0fc;
+      #bookdate {
+        margin: 50px auto;
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        border: 2px double #222;
+        background-color: #d8f0fc;
         text-align: center;
       }
+
       h1 {
-        margin-top:80px;
+        margin-top: 80px;
       }
+
       .accent {
-        font-size:1.8em;
-        font-weight:bold;
-        color:red;
+        font-size: 1.8em;
+        font-weight: bold;
+        color: red;
       }
     </style>
   </div>
@@ -92,7 +132,8 @@
 
   <section id="section_imgChange">
     <div id="prod-pic">
-      <img src="images/coffee-pink.jpg" alt="커피 사진" id='cup' width="200" height='200' onclick='displaySrc()'>
+      <img src="images/coffee-pink.jpg" alt="커피 사진" id='cup' width="200" height='200'>
+      <!-- onclick='displaySrc()'> -->
       <div id="small-pic">
         <img src="images/coffee-pink.jpg" alt="" class="small">
         <img src="images/coffee-blue.jpg" alt="" class="small">
@@ -104,10 +145,10 @@
 
   <script>
     // 구구단
-    for (let i=2; i<=9; i++) {
+    for (let i = 2; i <= 9; i++) {
       document.write("<div>");
       document.write("<h3>" + i + "단</h3>");
-      for (let j=1; j<=9; j++) {
+      for (let j = 1; j <= 9; j++) {
         document.write(`${i} x ${j} = ${i*j}<br>`);
       }
       document.write("</div>");
@@ -116,7 +157,7 @@
     const userNum = 5;
     let n = userNum;
     let sum = 1;
-    while(n) {
+    while (n) {
       sum *= n--;
     }
     console.log(`${n}! = ${sum}`);
@@ -124,18 +165,18 @@
 
 
     document.write('<h2>좌석 번호 매기기</h2>');
-    let memNum = 41;//parseInt(prompt('입장객은 몇 명인가요?', 41));
-    let colNum = 7;//parseInt(prompt('한 줄에 몇 명씩 앉습니까?', 7));
+    let memNum = 41; //parseInt(prompt('입장객은 몇 명인가요?', 41));
+    let colNum = 7; //parseInt(prompt('한 줄에 몇 명씩 앉습니까?', 7));
     let rowNum = 1;
-    if ( memNum % colNum === 0 )
-      rowNum = parseInt(memNum/colNum);
+    if (memNum % colNum === 0)
+      rowNum = parseInt(memNum / colNum);
     else
-      rowNum = parseInt(memNum/colNum) + 1;
+      rowNum = parseInt(memNum / colNum) + 1;
     let seatNo = 0;
     document.write(`<table>`)
-    for (let i=0; i<rowNum; i++) {
+    for (let i = 0; i < rowNum; i++) {
       document.write(`<tr>`)
-      for (let j=1; j<=colNum; j++) {
+      for (let j = 1; j <= colNum; j++) {
         seatNo = i * colNum + j;
         if (seatNo > memNum) break;
         document.write(`<td>좌석${seatNo}</td>`)
@@ -146,6 +187,7 @@
 
     // 호이스팅 예제 (hoisting : 끌어올린다라는 뜻) - 실제 소스 코드를 끌어올린다는 것이 아니고 그런 식으로 해석한다는 의미
     let x = 10
+
     function fn1() {
       console.log('x=' + x)
       console.log(y)
@@ -153,78 +195,78 @@
     }
     fn1();
 
-    
-    document.querySelectorAll('ul li').forEach( item => {
-      item.onclick = function() {
+
+    document.querySelectorAll('ul li').forEach(item => {
+      item.onclick = function () {
         document.body.style.backgroundColor = this.innerHTML.toLowerCase();
       }
-      item.onmouseover = function() {
+      item.onmouseover = function () {
         this.style.backgroundColor = this.innerHTML.toLowerCase();
       }
-      item.onmouseleave = function() {
+      item.onmouseleave = function () {
         this.style.backgroundColor = 'inherit';
       }
     });
 
 
     // 15장 마무리 문제 1번
-    const n1 = 5;//parseInt(prompt('number? : ', 5))
-    const n2 = 10;//parseInt(prompt('number? : ', 10))
+    const n1 = 5; //parseInt(prompt('number? : ', 5))
+    const n2 = 10; //parseInt(prompt('number? : ', 10))
     function sumMulti(n1, n2) {
-        return n1 === n2 ? n1*n2 : n1 + n2; // 조건 연산자 == 삼항연산자
+      return n1 === n2 ? n1 * n2 : n1 + n2; // 조건 연산자 == 삼항연산자
     }
     console.log(sumMulti(n1, n2));
 
     // Array 객체의 메서드
-    let nums = [1,2,3]
-    let chars = ['a','b','c','d']
+    let nums = [1, 2, 3]
+    let chars = ['a', 'b', 'c', 'd']
     // concat() : immutable. concat()으로 합쳐진 배열은 기존 배열에 영향을 주지 않고 새로운 배열을 만든다.
     const numsChars = nums.concat(chars)
     const charsNums = chars.concat(nums)
     console.log(numsChars, charsNums)
     console.log(numsChars.join('/'))
 
-    console.log('before: '+nums)
+    console.log('before: ' + nums)
     // unshift(), push() 하면 원래 배열이 바뀌다고 함. mutable
-    nums.unshift(-1, 0);// 맨앞에 넣음
-    let ret1 = nums.push(4,5);// 맨뒤에 넣음
-    console.log('after nums : '+nums)
+    nums.unshift(-1, 0); // 맨앞에 넣음
+    let ret1 = nums.push(4, 5); // 맨뒤에 넣음
+    console.log('after nums : ' + nums)
     console.log(ret1)
 
     // shift():맨앞에서 뺌, pop():맨뒤에서 뺌. mutable
     nums.shift()
-    console.log('shift() : '+nums)
+    console.log('shift() : ' + nums)
     nums.pop()
-    console.log('pop() : ' +nums)
+    console.log('pop() : ' + nums)
 
     // splice(): mutable. 중간 원하는 지점에 원하는 만큼 빼내 반환, 그자리에 새 요소들 추가도 가능. 원형 인스턴스 변경됨.
     let study = ['html', "css", 'web', 'jquery']
     console.log(`study: [${study.join()}]`)
-    let newStudy = study.splice(2,1)
+    let newStudy = study.splice(2, 1)
     console.log(`.splice(2,1) => study: [${study.join(',')}] => newStudy: ${newStudy}`)
-    study.splice(2,1,'js')
+    study.splice(2, 1, 'js')
     console.log(`.splice(2,1,'js') => study: [${study.join()}]`)
 
     // slice(): immutable. 원하는 지점의 원소를 빼내지만, 원형 인스턴스는 변경 안됨.
     let colors = ['red', 'green', 'blue', 'white', 'black']
     console.log(`colors: [${colors.join()}]`)
-    let colors2 = colors.slice(2,4)
+    let colors2 = colors.slice(2, 4)
     console.log(`colors: [${colors.join()}]`)
     console.log(`colors2: [${colors2.join()}]`)
-    
+
 
     // 날짜경과/시간차 계산
     let today = new Date()
     let startDay = new Date('2021-08-11T00:00:00')
     let passedTime = today.getTime() - startDay.getTime();
     let days = Math.ceil(passedTime / (1000 * 60 * 60 * 24))
-    console.log('passedTime: '+passedTime)
-    console.log('days: '+days)
+    console.log('passedTime: ' + passedTime)
+    console.log('days: ' + days)
     document.querySelector('#result').innerHTML = days;
 
     // 당첨자 뽑기 : 100명중 랜덤 숫자 뽑기 = 1 ~ 100번
     const numOfPerson = 100;
-    let pickNum = Math.floor(Math.random() * numOfPerson +1); // 반올림이나 올림하면 100번이 넘어갈 수 있으므로 floor으로 소수점 버림
+    let pickNum = Math.floor(Math.random() * numOfPerson + 1); // 반올림이나 올림하면 100번이 넘어갈 수 있으므로 floor으로 소수점 버림
     console.log(`Winner Number is ${pickNum}`)
 
     // 팝업 차단 체크와 팝업 창 생성/열기
@@ -239,7 +281,7 @@
       let newPopup = window.open(doc, popName, opt)
       //팝업 창에서 부모로 접근하기 위해, 팝업창 객체를 만든 부모가 자신(self)이라고 알려 줌.
       newPopup.creator = self;
-      newPopup ? newPopup.moveBy(50,50) : alert('팝업 차단됨. 차단 해제 바람')
+      newPopup ? newPopup.moveBy(50, 50) : alert('팝업 차단됨. 차단 해제 바람')
     }
     // 문서 열리자 마자 팝업창 열림.
     openPopup('practice.html', 'Popup Window Name', 400, 500);
@@ -255,12 +297,13 @@
     setInterval(displayTime, 1000); // 1초마다 시간 계산 함수 실행
     function displayTime() {
       const date = new Date();
-      const time = date.toLocaleTimeString();//  toLocaleTimeString() 메서드를 사용해 지역에 맞는 시간을 가져옴
+      const time = date.toLocaleTimeString(); //  toLocaleTimeString() 메서드를 사용해 지역에 맞는 시간을 가져옴
       document.querySelector('#current').innerHTML = time;
     }
+    // (레이어드)팝업창 연습 
 
-    // '현재시각 팝업창' 버튼 클릭시 시간 보여주는 (레이어드)팝업창 띄움
-    document.querySelector('#btn_time').onclick = function() {
+    // (레이어드)팝업창 연습: '현재시각 팝업창' 버튼 클릭시 시간 보여줌
+    document.querySelector('#btn_time').onclick = function () {
       document.querySelector('#timePopSection > h3').innerHTML = new Date().toLocaleTimeString();
       const timeSection = document.querySelector('#timePopSection');
       timeSection.style.display = 'block';
@@ -272,24 +315,41 @@
       console.log("timeSection.style.top: ", timeSection.style.top)
     }
     // '현재시각 팝업창' 안의 닫기 버튼
-    document.querySelector('#btn_closeTime').onclick = function() {
+    document.querySelector('#btn_closeTime').onclick = function () {
       document.querySelector('#timePopSection').style.display = 'none';
     }
-    
+
 
     // html element의 속성 접근하고 속성 값 변경하기
     // 상단 이미지 클릭시 이미지 소스 알림.
+    document.querySelector('#cup').onclick = displaySrc;
+
     function displaySrc() {
-      alert('이미지 소스: ' + document.querySelector('#cup').getAttribute('src'))
+      console.log('이미지 소스: ' + document.querySelector('#cup').getAttribute('src'));
+      document.getElementById('cup').onclick = event => alert(
+        `event type: ${event.type}, event location: ${event.pageX}, ${event.pageY}, screenXY: ${screenX}, ${screenY} scrollXY: ${scrollX}, ${scrollY}`
+        )
     }
-    
+
     // 하단 이미지 클릭시 상단 영역의 이미지를 클릭한 이미지로 바꾸기
     document.querySelectorAll('#small-pic img').forEach(item => {
-      item.onclick = function() {
-        document.querySelector('#cup').setAttribute('src', this.src)
-      }
+      // item.onclick = function() {
+      //   document.querySelector('#cup').setAttribute('src', this.src)
+      // }
+      item.addEventListener('mouseover', changePic); // 포인터를 올리면 changePic
+      item.addEventListener('mouseout', originPic);
     });
+
+    function changePic() {
+      document.querySelector('#cup').setAttribute('src', this.src);
+    }
+
+    function originPic() {
+      document.querySelector('#cup').setAttribute('src', 'images/coffee-pink.jpg');
+
+    }
   </script>
-  
+
 </body>
+
 </html>
