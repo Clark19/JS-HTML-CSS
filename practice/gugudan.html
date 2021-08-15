@@ -34,6 +34,15 @@
       font-size: 0.9em;
       text-align: center;
     }
+
+    .check {
+      color:#ccc;
+      font-size: 20px;
+      margin-right: 25px;
+    }
+    .btn_del {
+      margin-left: 25px;
+    }
   </style>
 </head>
 
@@ -98,6 +107,16 @@
     </style>
   </section>
 
+  <!-- ToDo 입력 -->
+  <section id="todo">
+    <form action="">
+      <input type="text" id="input_todoText" autofocus placeholder="할 일을 입력하세요">
+      <button id='btn_addTodo'>추가</button>
+    </form>
+    <ul id='todoList'>
+    </ul>
+  </section>
+
   <h2>구구단 - Ch.14</h2>
 
   <div id="bookdate">
@@ -113,6 +132,7 @@
         border: 2px double #222;
         background-color: #d8f0fc;
         text-align: center;
+        transition: .5s;
       }
 
       h1 {
@@ -130,6 +150,8 @@
   <button onclick="location.assign('http://www.easyspub.co.kr/20_Menu/BookView/228/EDU')">이지스퍼블리싱 홈페이지로 이동</button>
   <!-- location.replace()사용하면 뒤로가기가 안되서 불편 함. -->
 
+  <button id='btn_newNode'>새로운 노드 추가</button>
+
   <section id="section_imgChange">
     <div id="prod-pic">
       <img src="images/coffee-pink.jpg" alt="커피 사진" id='cup' width="200" height='200'>
@@ -140,6 +162,44 @@
         <img src="images/coffee-gray.jpg" alt="" class="small">
       </div>
     </div>
+
+    <!-- 이미지 라이트 박스 - 레이어드 팝업과 유사 -->
+    <div class="row">
+      <h2>이미지 라이트 박스</h2>
+      <ul>
+        <li><img src="images/tree-3-thumb.jpg" data-src="images/tree-3.jpg" class="pic"></li>
+        <li><img src="images/tree-4-thumb.jpg" data-src="images/tree-4.jpg" class="pic"></li>
+        <li><img src="images/tree-6-thumb.jpg" data-src="images/tree-6.jpg" class="pic"></li>
+      </ul>
+    </div>
+    <div id="lightbox">
+      <img src="images/coffee-pink.jpg" alt="" id='lightboxImage'>
+    </div>
+    <style>
+      /* 라이트 박스 스타일 */
+      #lightbox {
+        position: fixed;
+        /* 위치 고정 */
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, .7);
+        top: 0;
+        left: 0;
+        display: none;
+      }
+
+      /* 라이트 박스 안의 이미지 */
+      #lightbox img {
+        position: absolute;
+        /* top, left에 의한 위치 지정 */
+        top: 50%;
+        /*  top/left에서 50% 수치는 페이지 크기의 50%인듯 */
+        left: 50%;
+        transform: translate(-50%, -50%);
+        /* 요소를 화면 중앙에 표시하기 위해 이동: -50% 수치는 img 엘리먼트 자체 크기에서 50%인듯 */
+        border: 5px solid #eee;
+      }
+    </style>
   </section>
 
 
@@ -263,6 +323,16 @@
     console.log('passedTime: ' + passedTime)
     console.log('days: ' + days)
     document.querySelector('#result').innerHTML = days;
+    document.getElementById('bookdate').onmouseover = function () {
+      this.style.borderRadius = '10px';
+      this.style.backgroundColor = "green";
+    }
+    document.getElementById('bookdate').onmouseout = function () {
+      this.style.borderRadius = ''; //테두리 원래 값으로 지정
+      this.style.backgroundColor = ''; //원래 값으로 지정
+
+    }
+
 
     // 당첨자 뽑기 : 100명중 랜덤 숫자 뽑기 = 1 ~ 100번
     const numOfPerson = 100;
@@ -328,26 +398,103 @@
       console.log('이미지 소스: ' + document.querySelector('#cup').getAttribute('src'));
       document.getElementById('cup').onclick = event => alert(
         `event type: ${event.type}, event location: ${event.pageX}, ${event.pageY}, screenXY: ${screenX}, ${screenY} scrollXY: ${scrollX}, ${scrollY}`
-        )
+      )
     }
 
-    // 하단 이미지 클릭시 상단 영역의 이미지를 클릭한 이미지로 바꾸기
+    // 하단 이미지 마우스 포인터 위치시 상단 영역의 이미지 바꾸기
     document.querySelectorAll('#small-pic img').forEach(item => {
-      // item.onclick = function() {
-      //   document.querySelector('#cup').setAttribute('src', this.src)
-      // }
-      item.addEventListener('mouseover', changePic); // 포인터를 올리면 changePic
-      item.addEventListener('mouseout', originPic);
+      item.addEventListener('mouseover', function () {
+        document.querySelector('#cup').setAttribute('src', this.src);
+      }); // 포인터를 올리면 change Picture
+      item.addEventListener('mouseout', () => document.querySelector('#cup').setAttribute('src',
+        'images/coffee-pink.jpg'));
     });
 
-    function changePic() {
-      document.querySelector('#cup').setAttribute('src', this.src);
+    // 이미지 라이트 박스 - 썸네일 클릭시 레이어드 전체 팝업에 큰 이미지의 본 파일 보여주기
+    // 작은 사이즈의 thumbnail 이미진 src 속성 이용, 큰 사이즈 경로는 data-src 속성 이용해 이미지 보여주는 방식
+    const pics = document.getElementsByClassName('pic');
+    for (let i = 0; i < pics.length; i++) {
+      pics[i].addEventListener('click', function () {
+        document.querySelector('#lightbox').style.display = 'block';
+        document.querySelector('#lightbox img').src = this.getAttribute('data-src');
+      });
+    }
+    // 라이트 박스 클릭시, 라이트박스 닫기
+    document.getElementById('lightbox').onclick = function () {
+      this.style.display = 'none';
     }
 
-    function originPic() {
-      document.querySelector('#cup').setAttribute('src', 'images/coffee-pink.jpg');
-
+    // DOM에 노드 추가,삭제 하기
+    // 노드 생성, 추가
+    document.querySelector('#btn_newNode').onclick = function () {
+      addNewNode();
+      this.onclick = '';
+      // 링크를 클릭하면 addNewNode() 가 한번만 실행되도록 하기 위한 것.
     }
+
+    function addNewNode() {
+      const newP = document.createElement('p');
+      const txtNode = document.createTextNode('DOM은 document object model 의 약자임. ');
+      newP.appendChild(txtNode)
+      document.getElementById('section_imgChange').appendChild(newP)
+
+      // 속성 값이 있는 노드 생성/추가 방법
+      const newImg = document.createElement('img')
+      const srcNode = document.createAttribute('src')
+      const altNode = document.createAttribute('alt')
+      srcNode.value = 'images/tree-3-thumb.jpg';
+      altNode.value = '어두운 배경 나무 이미지';
+      newImg.setAttributeNode(srcNode)
+      newImg.setAttributeNode(altNode)
+      document.getElementById('section_imgChange').appendChild(newImg);
+    }
+
+
+    // Todo 만들기
+    document.getElementById('btn_addTodo').onclick = function (e) {
+      let newItem = document.createElement('li');
+      let subject = document.getElementById('input_todoText');
+      newItem.appendChild(createCheckBtn());
+      newItem.appendChild(document.createTextNode(subject.value));
+      newItem.appendChild(createDelBtn());
+
+      const itemList = document.querySelector('#todoList');
+      // itemList.appendChild(newItem); // 맨 뒤에 추가
+      // 최근 입력한 값을 맨 위에 나타나게/추가 하기
+      // itemList.childNodes : itemList의 자식 노드들
+      itemList.insertBefore(newItem, itemList.childNodes[0]);
+      subject.value = '';
+      /* return false; 하는 이유:
+        <form> 태그 안에서 button의 기본기능인 submit을 먼저 실행하지 않고, 함수만 실행하게 하기 위해서.
+        form 태그로 감싸지 않았다면 return false; 할 필요 없음.
+        form 태그로 감쌓을때의 이점은 엔터키 눌러도 자동으로 click 이벤트 핸들러 호출함.
+      */
+      return false;
+    }
+    // 17장 마무리 문제 1 풀기
+    // 할일 목록에 완료/지우기 버튼 기능 만들기
+    function createCheckBtn() {
+      const checkBtn = document.createElement('span')
+      checkBtn.classList.add('check');
+      checkBtn.innerHTML = '&check;';
+      checkBtn.onclick = function() {
+        this.style.textDecoration = 'line-through';
+        this.parentNode.style.textDecoration = 'line-through'
+      }
+      return checkBtn;
+    }
+    function createDelBtn() {
+      const btnItem = document.createElement("button");
+      btnItem.appendChild(document.createTextNode('X'));
+      const clsAttr = document.createAttribute('class');
+      clsAttr.value = 'btn_del'
+      btnItem.setAttributeNode(clsAttr);
+      btnItem.addEventListener('click', function() {
+        this.parentNode.parentNode.removeChild(this.parentNode);
+      });
+      return btnItem;
+    }
+
   </script>
 
 </body>
