@@ -35,6 +35,7 @@
       text-align: center;
     }
 
+    /* ToDo */
     .check {
       color: #ccc;
       font-size: 20px;
@@ -46,8 +47,12 @@
       color: #ccc;
     }
 
-    .btn_del {
-      margin-left: 25px;
+    .btn {
+      margin-left: 10px;
+    }
+
+    #todo li input {
+      border: none;
     }
   </style>
 </head>
@@ -459,9 +464,14 @@
     // Todo 만들기
     document.getElementById('btn_addTodo').onclick = function (e) {
       let newItem = document.createElement('li');
-      let subject = document.getElementById('input_todoText');
+
+      const idAttr = document.createAttribute('id');
+      idAttr.value = 'item' + new Date().getTime().toString();
+      newItem.setAttributeNode(idAttr);
+
       newItem.appendChild(createCheckBtn());
-      newItem.appendChild(document.createTextNode(subject.value));
+      newItem.appendChild(createEditTextBox());
+      newItem.appendChild(createEditBtn());
       newItem.appendChild(createDelBtn());
 
       const itemList = document.querySelector('#todoList');
@@ -469,7 +479,7 @@
       // 최근 입력한 값을 맨 위에 나타나게/추가 하기
       // itemList.childNodes : itemList의 자식 노드들
       itemList.insertBefore(newItem, itemList.childNodes[0]);
-      subject.value = '';
+      document.getElementById('input_todoText').value = '';
       /* return false; 하는 이유:
         <form> 태그 안에서 button의 기본기능인 submit을 먼저 실행하지 않고, 함수만 실행하게 하기 위해서.
         form 태그로 감싸지 않았다면 return false; 할 필요 없음.
@@ -482,18 +492,58 @@
     function createCheckBtn() {
       const checkBtn = document.createElement('span')
       checkBtn.classList.add('check');
-      checkBtn.innerHTML = '&check;';
+      checkBtn.innerHTML = '&#x2705;'; // '&check;' 
       checkBtn.onclick = function () {
         this.parentNode.classList.toggle('checked')
+        this.parentNode.childNodes[1].classList.toggle('checked')
       }
       return checkBtn;
     }
 
+    function createEditTextBox() {
+      const inputText = document.createElement('input')
+      let subject = document.getElementById('input_todoText');
+      inputText.value = subject.value;
+      inputText.readOnly = true;
+      return inputText;
+    }
+
+    const EDIT_READONLY_MODE = 0;
+    const EDIT_POSSIBLE_MODE = 1;
+    const EDIT_READONLY_ICON = '\u270F'
+    const EDIT_POSSIBLE_ICON = '\u2714'
+    let currentEditMode = EDIT_READONLY_MODE;
+
+    function createEditBtn() {
+      const btnItem = document.createElement('button');
+      // EDIT_READONLY_MODE
+      btnItem.appendChild(document.createTextNode('\u270F')); //1f527 wrench
+      btnItem.classList.add('btn')
+      btnItem.onclick = function () {
+        // changeEditBtnIcon()
+        if (currentEditMode == EDIT_READONLY_MODE) {
+          this.parentNode.childNodes[1].readOnly = false;
+          this.parentNode.childNodes[1].select();
+          this.parentNode.childNodes[2].replaceChild(document.createTextNode(EDIT_POSSIBLE_ICON), this.parentNode
+            .childNodes[2]
+            .firstChild)
+          currentEditMode = EDIT_POSSIBLE_MODE;
+        } else { // EDIT_POSSIBLE_MODE
+          this.parentNode.childNodes[1].readOnly = true;
+          this.parentNode.childNodes[2].replaceChild(document.createTextNode(EDIT_READONLY_ICON), this.parentNode
+            .childNodes[2]
+            .firstChild)
+          currentEditMode = EDIT_READONLY_MODE;
+        }
+      }
+      return btnItem;
+    }
+
     function createDelBtn() {
       const btnItem = document.createElement("button");
-      btnItem.appendChild(document.createTextNode('X'));
+      btnItem.appendChild(document.createTextNode('\u274c'));
       const clsAttr = document.createAttribute('class');
-      clsAttr.value = 'btn_del'
+      clsAttr.value = 'btn'
       btnItem.setAttributeNode(clsAttr);
       btnItem.addEventListener('click', function () {
         this.parentNode.parentNode.removeChild(this.parentNode);
