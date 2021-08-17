@@ -128,6 +128,17 @@
     </ul>
   </section>
 
+  <!-- 동적 테이블 만들기 -->
+  <section id="section_makeTable">
+    <section id="inputTableSection">
+      <input type="text" id="rows" size='5'>행
+      <input type="text" id="cols" size='5'>열
+      <button id="btn_makeTable">표 생성</button>
+    </section>
+    <!-- <table>
+    </table> -->
+  </section>
+
   <h2>구구단 - Ch.14</h2>
 
   <div id="bookdate">
@@ -158,7 +169,7 @@
     </style>
   </div>
 
-  <button onclick="location.assign('http://www.easyspub.co.kr/20_Menu/BookView/228/EDU')">이지스퍼블리싱 홈페이지로 이동</button>
+  <button onclick="location.assign(' http://www.easyspub.co.kr/20_Menu/BookView/228/EDU')">이지스퍼블리싱 홈페이지로 이동</button>
   <!-- location.replace()사용하면 뒤로가기가 안되서 불편 함. -->
 
   <button id='btn_newNode'>새로운 노드 추가</button>
@@ -487,8 +498,8 @@
       */
       return false;
     }
-    // 17장 마무리 문제 1 풀기
-    // 할일 목록에 완료/지우기 버튼 기능 만들기
+    // 17장 마무리 문제 1번 풀기
+    // 할일 목록과 완료/수정/지우기 기능 만들기
     function createCheckBtn() {
       const checkBtn = document.createElement('span')
       checkBtn.classList.add('check');
@@ -505,6 +516,7 @@
       let subject = document.getElementById('input_todoText');
       inputText.value = subject.value;
       inputText.readOnly = true;
+      inputText.disabled = true;
       return inputText;
     }
 
@@ -522,6 +534,7 @@
       btnItem.onclick = function () {
         // changeEditBtnIcon()
         if (currentEditMode == EDIT_READONLY_MODE) {
+          this.parentNode.childNodes[1].disabled = false;
           this.parentNode.childNodes[1].readOnly = false;
           this.parentNode.childNodes[1].select();
           this.parentNode.childNodes[2].replaceChild(document.createTextNode(EDIT_POSSIBLE_ICON), this.parentNode
@@ -529,6 +542,7 @@
             .firstChild)
           currentEditMode = EDIT_POSSIBLE_MODE;
         } else { // EDIT_POSSIBLE_MODE
+          this.parentNode.childNodes[1].disabled = true;
           this.parentNode.childNodes[1].readOnly = true;
           this.parentNode.childNodes[2].replaceChild(document.createTextNode(EDIT_READONLY_ICON), this.parentNode
             .childNodes[2]
@@ -550,6 +564,28 @@
       });
       return btnItem;
     }
+
+    // 17장 마무리 문제 2번 풀기
+    // 동적으로 표 만들기
+    function makeTable() {
+      const table = document.createElement('table');
+      const rows = document.querySelector('#rows');
+      const cols = document.querySelector('#cols');
+      let tr = undefined;
+      let td = undefined;
+
+      for (let rowNum = 0; rowNum < rows.value; rowNum++) {
+        tr = document.createElement('tr');
+        for (let colNum = 0; colNum < cols.value; colNum++) {
+          td = document.createElement('td');
+          td.append(document.createTextNode(`${rowNum}, ${colNum}`));
+          tr.append(td)
+        }
+        table.append(tr)
+      }
+      document.getElementById('section_makeTable').appendChild(table);
+    }
+    document.querySelector('#btn_makeTable').addEventListener('click', makeTable);
   </script>
 
 </body>
