@@ -36,10 +36,16 @@
     }
 
     .check {
-      color:#ccc;
+      color: #ccc;
       font-size: 20px;
       margin-right: 25px;
     }
+
+    .checked {
+      text-decoration: line-through;
+      color: #ccc;
+    }
+
     .btn_del {
       margin-left: 25px;
     }
@@ -477,24 +483,23 @@
       const checkBtn = document.createElement('span')
       checkBtn.classList.add('check');
       checkBtn.innerHTML = '&check;';
-      checkBtn.onclick = function() {
-        this.style.textDecoration = 'line-through';
-        this.parentNode.style.textDecoration = 'line-through'
+      checkBtn.onclick = function () {
+        this.parentNode.classList.toggle('checked')
       }
       return checkBtn;
     }
+
     function createDelBtn() {
       const btnItem = document.createElement("button");
       btnItem.appendChild(document.createTextNode('X'));
       const clsAttr = document.createAttribute('class');
       clsAttr.value = 'btn_del'
       btnItem.setAttributeNode(clsAttr);
-      btnItem.addEventListener('click', function() {
+      btnItem.addEventListener('click', function () {
         this.parentNode.parentNode.removeChild(this.parentNode);
       });
       return btnItem;
     }
-
   </script>
 
 </body>
