@@ -6,95 +6,8 @@
   <title>Travel Agency</title>
   <meta name='viewport' content="width=device-width, initial-scale=1, user-scalable=yes">
   <meta name='description' content="Travel Agency">
-  <!-- <link rel="stylesheet" href="css/style.css"> -->
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Merienda+One&family=Merienda:wght@400;700&display=swap');
+  <link rel="stylesheet" href="css/style.css">
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    a {
-      text-decoration: none;
-    }
-
-    #container {
-      margin: 0 auto;
-      width: 1200px;
-    }
-
-    /* 헤더 */
-    header {
-      width: 100%;
-      height: 100px;
-      background-color: #07c;
-    }
-
-    /* 로고 */
-    #logo {
-      float: left;
-      width: 250px;
-      height: 100px;
-      line-height: 100px;
-      padding-left: 20px;
-    }
-
-    #logo h1 {
-      font-family: 'Merienda One', cursive;
-      font-size: 40px;
-      color: #fff;
-      text-shadow: 0 -1px 0 #222;
-    }
-
-    /* 내비게이션 */
-    nav {
-      float: right;
-      width: 900px;
-      height: 100px;
-      background-color: green;
-    }
-
-    /* 이미지 슬라이드 쇼 */
-    #slideShow {
-      /* 플로팅 해제 */
-      clear: both;
-      width: 100%;
-      height: 300px;
-      background-color: orange;
-      /* 영역 넘치면 감춤 */
-      overflow: hidden;
-    }
-
-    /* 컨텐츠 영역 */
-    #contents {
-      width: 100%;
-      height: 300px;
-    }
-
-    /* 탭 메뉴 */
-    #tabMenu {
-      float: left;
-      width: 50%;
-      height: 100%;
-      background: violet;
-    }
-
-    /* 퀵 링크 */
-    #links {
-      float: right;
-      width: 50%;
-      height: 100%;
-      background: skyblue;
-    }
-
-    footer {
-      width: 100%;
-      height: 100px;
-      background: gray;
-    }
-  </style>
 </head>
 
 <body>
@@ -105,7 +18,28 @@
           <h1>Dream Jeju</h1>
         </a>
       </div>
-      <nav></nav>
+
+      <nav>
+        <ul id="topMenu">
+          <li>
+            <a href="#">단체여행<span>🔽</span></a>
+            <ul>
+              <li><a href="#">회사 연수</a></li>
+              <li><a href="#">수학 여행</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">맞춤 여행 <span>🔽</span></a>
+            <ul>
+              <li><a href="#">4.3 평화 기행</a></li>
+              <li><a href="#">곶자왈 체험</a></li>
+              <li><a href="#">힐링 워크숍</a></li>
+            </ul>
+          </li>
+          <li><a href="#">갤러리</a></li>
+          <li><a href="#">문의하기</a></li>
+        </ul>
+      </nav>
     </header>
 
     <!-- 슬라이드 -->
