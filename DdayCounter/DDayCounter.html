@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>D-Day Counter</title>
+    <link rel="stylesheet" href="DDayCounter.css" />
+  </head>
+
+  <body>
+    <header>D-Day Counter</header>
+    <nav>Menu</nav>
+
+    <main>
+      <section class="contents">
+        <h2>D-Day</h2>
+        <div id="text_dday">
+          <span id="day">일</span> <span class="hour">시간</span>
+          <span class="minute">분</span>
+          <span class="sec">초</span>
+        </div>
+        <div id="text_guide">D-Day를 입력해 주세요</div>
+        <div class="dday_input_date">
+          <input
+            id="inputYear"
+            type="number"
+            class="date"
+            size="5"
+            placeholder="년도 입력"
+          />-
+          <input
+            id="inputMonth"
+            type="number"
+            class="date"
+            size="5"
+            placeholder="월 입력"
+          />-
+          <input
+            id="inputDay"
+            type="number"
+            class="date"
+            size="5"
+            placeholder="일 입력"
+          />
+        </div>
+        <div class="btn_wrapper">
+          <button id="btnStart" disabled>카운트다운 시작</button>
+        </div>
+        <div class="btn_wrapper">
+          <button id="btnResetTimer" disabled>타이머 초기화</button>
+        </div>
+      </section>
+    </main>
+
+    <footer>footer</footer>
+
+    <script src="./DDayCounter.js"></script>
+  </body>
+</html>
