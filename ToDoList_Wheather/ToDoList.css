@@ -36,11 +36,30 @@ section {
 }
 
 #listTodo {
-  width: 100%;
-  margin: 0.3rem 3rem 0rem 3rem;
+  width: 70%;
+  /* margin: 0.3rem 3rem 0rem 3rem; */
   list-style: none;
+  padding-left: 0;
 }
 #listTodo li {
   background: rgb(241, 237, 237);
   border-radius: 9px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.3rem;
+}
+
+/* ToDo 아이템 */
+#listTodo li input {
+  border: none;
+  width: calc(100% - 7rem);
+}
+.check {
+  color: #ccc;
+  font-size: 20px;
+}
+
+.checked {
+  text-decoration: line-through;
+  color: #ccc;
 }
