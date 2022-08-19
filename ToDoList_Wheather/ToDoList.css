@@ -1,0 +1,46 @@
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.input_wrapper {
+  display: flex;
+  justify-content: center;
+  /* border: 1px solid gray; */
+  border-radius: 8px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.text_todo {
+  display: flex;
+  align-items: center;
+  width: 5rem;
+  padding-left: 0.3rem;
+
+  background: rgb(93, 219, 100);
+  /* background: rgb(104, 104, 223); */
+  color: white;
+  border-radius: 9px 0 0 9px;
+  margin-right: 0.1rem;
+}
+#inputTodo {
+  width: 20rem;
+  margin-right: 0.2rem;
+}
+#btnAdd {
+  width: 5rem;
+  background: rgb(209, 171, 224);
+  border-radius: 0 9px 9px 0;
+}
+
+#listTodo {
+  width: 100%;
+  margin: 0.3rem 3rem 0rem 3rem;
+  list-style: none;
+}
+#listTodo li {
+  background: rgb(241, 237, 237);
+  border-radius: 9px;
+}
