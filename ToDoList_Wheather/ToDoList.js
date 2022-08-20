@@ -2,9 +2,11 @@ class App {
   #inputTodo = document.querySelector("#inputTodo");
   #btnAdd = document.getElementById("btnAdd");
   #todoList = document.getElementById("listTodo");
+  #btnDelAll = document.getElementById("btnDelAll");
 
   constructor() {
     this.#btnAdd.onclick = this.#onClickBtnAdd.bind(this);
+    this.#btnDelAll.onclick = this.#onDeleteAll.bind(this);
   }
 
   #onClickBtnAdd(e) {
@@ -32,7 +34,7 @@ class App {
   #createCheckBtn() {
     const checkBtn = document.createElement("span");
     checkBtn.classList.add("check");
-    // checkBtn.innerText = "🔳🔲⬜⬛☑✔✅"; // '&check;'
+    // checkBtn.innerText = "🔳🔲⬜⬛☑✔✅";
     // checkBtn.innerHTML = "&#x2705;"; // '&check;'
     checkBtn.innerText = "⬜";
     checkBtn.checked = false;
@@ -99,6 +101,15 @@ class App {
     );
 
     return btnDel;
+    s;
+  }
+
+  #onDeleteAll(e) {
+    let $todoItem = this.#todoList.lastElementChild;
+    while ($todoItem) {
+      this.#todoList.removeChild($todoItem);
+      $todoItem = this.#todoList.lastElementChild;
+    }
   }
 }
 
