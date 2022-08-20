@@ -114,3 +114,39 @@ class App {
 }
 
 new App();
+
+weatherProcess();
+
+async function weatherProcess() {
+  const $regionName = document.getElementsByClassName("region_name")[0];
+
+  const geoLocation = await new Promise((resolve, reject) => {
+    const options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0,
+    };
+    navigator.geolocation.getCurrentPosition(resolve, reject, options);
+  });
+  console.log(geoLocation.coords);
+
+  const nowWeather = await getWeather(geoLocation.coords);
+  const savedWeather = JSON.parse(localStorage.getItem("weather"));
+  if (JSON.stringify(nowWeather) !== JSON.stringify(savedWeather)) {
+    localStorage.setItem("weather", JSON.stringify(nowWeather));
+    console.log(nowWeather);
+  } else {
+    console.log("not save weather");
+  }
+  $regionName.textContent = nowWeather.location;
+  document.body.style.backgroundImage = `url("./img/${nowWeather.weather}.jpg")`;
+
+  async function getWeather({ latitude, longitude }) {
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=37f358946c1e066e30de9e425d80b2c0`
+    );
+    const weatherData = await response.json();
+
+    return { location: weatherData.name, weather: weatherData.weather[0].main };
+  }
+}
