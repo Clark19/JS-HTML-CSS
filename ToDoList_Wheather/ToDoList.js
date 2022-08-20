@@ -130,16 +130,15 @@ async function weatherProcess() {
   });
   console.log(geoLocation.coords);
 
-  const nowWeather = await getWeather(geoLocation.coords);
+  const currentWeather = await getWeather(geoLocation.coords);
   const savedWeather = JSON.parse(localStorage.getItem("weather"));
-  if (JSON.stringify(nowWeather) !== JSON.stringify(savedWeather)) {
-    localStorage.setItem("weather", JSON.stringify(nowWeather));
-    console.log(nowWeather);
+  if (JSON.stringify(currentWeather) !== JSON.stringify(savedWeather)) {
+    localStorage.setItem("weather", JSON.stringify(currentWeather));
+    console.log(currentWeather);
   } else {
     console.log("not save weather");
   }
-  $regionName.textContent = nowWeather.location;
-  document.body.style.backgroundImage = `url("./img/${nowWeather.weather}.jpg")`;
+  setWeatherDisplay(currentWeather);
 
   async function getWeather({ latitude, longitude }) {
     const response = await fetch(
@@ -147,6 +146,23 @@ async function weatherProcess() {
     );
     const weatherData = await response.json();
 
-    return { location: weatherData.name, weather: weatherData.weather[0].main };
+    return {
+      regionName: weatherData.name,
+      weather: weatherData.weather[0].main,
+    };
+  }
+
+  function setWeatherDisplay({ regionName, weather }) {
+    const weatherMainList = [
+      "Clear",
+      "Clouds",
+      "Drizzle",
+      "Fog",
+      "Rain",
+      "Thunderstorm",
+    ];
+    weather = weatherMainList.includes(weather) ? weather : "Fog";
+    $regionName.textContent = regionName;
+    document.body.style.backgroundImage = `url("./img/${weather}.jpg")`;
   }
 }
