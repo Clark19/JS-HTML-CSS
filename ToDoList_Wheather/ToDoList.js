@@ -101,7 +101,6 @@ class App {
     );
 
     return btnDel;
-    s;
   }
 
   #onDeleteAll(e) {
@@ -128,15 +127,12 @@ async function weatherProcess() {
     };
     navigator.geolocation.getCurrentPosition(resolve, reject, options);
   });
-  console.log(geoLocation.coords);
+  console.log("current GeoPosition:", geoLocation.coords);
 
   const currentWeather = await getWeather(geoLocation.coords);
   const savedWeather = JSON.parse(localStorage.getItem("weather"));
   if (JSON.stringify(currentWeather) !== JSON.stringify(savedWeather)) {
     localStorage.setItem("weather", JSON.stringify(currentWeather));
-    console.log(currentWeather);
-  } else {
-    console.log("not save weather");
   }
   setWeatherDisplay(currentWeather);
 
@@ -145,6 +141,37 @@ async function weatherProcess() {
       `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=37f358946c1e066e30de9e425d80b2c0`
     );
     const weatherData = await response.json();
+
+    researchWeatherData(weatherData);
+
+    function researchWeatherData(data) {
+      const sys = data.sys;
+      const city = data.name;
+      const weather = data.weather;
+      const main = data.main;
+
+      const wmain = weather[0].main;
+      const w_id = weather[0].id;
+      const icon = weather[0].icon;
+      const country = sys.country;
+      const temp = main.temp;
+      const temp_min = main.temp_min;
+      const temp_max = main.temp_max;
+
+      console.log(data.weather);
+      console.log(data.main);
+      console.log(wmain);
+
+      document
+        .getElementById("weather_info")
+        .append(
+          `${wmain}, ${icon}, 현온:${parseInt(
+            temp - 273.15
+          )}  최저온도:${Number(temp_min - 273.15)}  최고온도:${
+            temp_max - 273.15
+          }  ${country} ${city} ${w_id}`
+        );
+    }
 
     return {
       regionName: weatherData.name,
