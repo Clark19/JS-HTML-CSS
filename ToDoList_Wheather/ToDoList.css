@@ -2,6 +2,19 @@ body {
   background-image: url(./img/Clear.jpg);
   background-size: cover;
 }
+h1,
+.region_name {
+  text-align: center;
+  color: white;
+  text-shadow: 3px 3px gray;
+  opacity: 80%;
+}
+.region_name {
+  font-size: 2rem;
+}
+input {
+  opacity: 70%;
+}
 section {
   display: flex;
   flex-direction: column;
@@ -54,6 +67,9 @@ section {
 }
 
 /* ToDo 아이템 */
+#listTodo li .check {
+  cursor: pointer;
+}
 #listTodo li input {
   border: none;
   width: calc(100% - 7rem);
@@ -66,4 +82,21 @@ section {
 .checked {
   text-decoration: line-through;
   color: #ccc;
+}
+
+button {
+  cursor: pointer;
+}
+#btnDelAll {
+  font-weight: bold;
+  background-color: antiquewhite;
+  padding: 0.2rem 1rem;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 3px 3px gray;
+}
+#btnDelAll:active {
+  box-shadow: none;
+  margin-left: 2px;
+  margin-top: 2px;
 }

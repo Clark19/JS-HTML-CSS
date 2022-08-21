@@ -101,7 +101,6 @@ class App {
     );
 
     return btnDel;
-    s;
   }
 
   #onDeleteAll(e) {
@@ -114,3 +113,83 @@ class App {
 }
 
 new App();
+
+weatherProcess();
+
+async function weatherProcess() {
+  const $regionName = document.getElementsByClassName("region_name")[0];
+
+  const geoLocation = await new Promise((resolve, reject) => {
+    const options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0,
+    };
+    navigator.geolocation.getCurrentPosition(resolve, reject, options);
+  });
+  console.log("current GeoPosition:", geoLocation.coords);
+
+  const currentWeather = await getWeather(geoLocation.coords);
+  const savedWeather = JSON.parse(localStorage.getItem("weather"));
+  if (JSON.stringify(currentWeather) !== JSON.stringify(savedWeather)) {
+    localStorage.setItem("weather", JSON.stringify(currentWeather));
+  }
+  setWeatherDisplay(currentWeather);
+
+  async function getWeather({ latitude, longitude }) {
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=37f358946c1e066e30de9e425d80b2c0`
+    );
+    const weatherData = await response.json();
+
+    researchWeatherData(weatherData);
+
+    function researchWeatherData(data) {
+      const sys = data.sys;
+      const city = data.name;
+      const weather = data.weather;
+      const main = data.main;
+
+      const wmain = weather[0].main;
+      const w_id = weather[0].id;
+      const icon = weather[0].icon;
+      const country = sys.country;
+      const temp = main.temp;
+      const temp_min = main.temp_min;
+      const temp_max = main.temp_max;
+
+      console.log(data.weather);
+      console.log(data.main);
+      console.log(wmain);
+
+      document
+        .getElementById("weather_info")
+        .append(
+          `${wmain}, ${icon}, 현온:${parseInt(
+            temp - 273.15
+          )}  최저온도:${Number(temp_min - 273.15)}  최고온도:${
+            temp_max - 273.15
+          }  ${country} ${city} ${w_id}`
+        );
+    }
+
+    return {
+      regionName: weatherData.name,
+      weather: weatherData.weather[0].main,
+    };
+  }
+
+  function setWeatherDisplay({ regionName, weather }) {
+    const weatherMainList = [
+      "Clear",
+      "Clouds",
+      "Drizzle",
+      "Fog",
+      "Rain",
+      "Thunderstorm",
+    ];
+    weather = weatherMainList.includes(weather) ? weather : "Fog";
+    $regionName.textContent = regionName;
+    document.body.style.backgroundImage = `url("./img/${weather}.jpg")`;
+  }
+}
