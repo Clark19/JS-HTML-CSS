@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ToDo List with Wheather Sync BG Image</title>
+    <script src="https://kit.fontawesome.com/116a85af51.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./ToDoList.css" />
   </head>
   <body>
@@ -12,16 +13,30 @@
     <nav></nav>
     <main>
       <article id="weather_info">
-        <div class="region_name">Guro</div>
-        <div>
-          <p class="w_id">날씨 상태</p>
-          <figure class="icon">icon</figure>
-          <p class="temp">temporature</p>
-          <aside><p class="temp_max">temp max</p>
-            <p class="temp_min">temp min</p>
+        <div class="region_name"></div>
+        <div class="weather_info_main">
+          <div>
+            <p class="w_id"></p>
+            <figure class="icon"><img src="http://openweathermap.org/img/w/10d.png" alt=""></figure>
+          </div>
+          <p class="temp"></p>
+          <aside>
+            <p class="temp_max"></p>
+            <p class="temp_min"></p>
           </aside>
         </div>
+        <!-- <img src="loading.gif" alt="" class="load_img"> -->
+
       </article>
+      <div class="contents">
+        <div class="loading">
+          <div class="rotate">
+            <i class="fa-solid fa-rotate-right"></i>
+          </div>
+          <span>Loading</span>
+        </div>
+      </div>
+
       <section>
 
         <form action="">

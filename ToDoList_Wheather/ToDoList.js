@@ -137,14 +137,19 @@ async function weatherProcess() {
   setWeatherDisplay(currentWeather);
 
   async function getWeather({ latitude, longitude }) {
-    const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=37f358946c1e066e30de9e425d80b2c0`
-    );
-    const weatherData = await response.json();
+    try {
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=37f358946c1e066e30de9e425d80b2c0`
+      );
+      const weatherData = await response.json();
 
-    researchWeatherData(weatherData);
+      researchWeatherData(weatherData);
+    } catch (error) {
+      console.log("날씨 정보 획득 실패");
+    }
 
     function researchWeatherData(data) {
+      // 날씨 데이터 객체 정보
       const sys = data.sys;
       const city = data.name;
       const weather = data.weather;
@@ -162,15 +167,24 @@ async function weatherProcess() {
       console.log(data.main);
       console.log(wmain);
 
-      document
-        .getElementById("weather_info")
-        .append(
-          `${wmain}, ${icon}, 현온:${parseInt(
-            temp - 273.15
-          )}  최저온도:${Number(temp_min - 273.15)}  최고온도:${
-            temp_max - 273.15
-          }  ${country} ${city} ${w_id}`
-        );
+      const $weatherInfo = document.getElementById("weather_info");
+
+      // 날씨 아이콘
+      const iconUrl = "http://openweathermap.org/img/w/" + icon;
+      const $imgIcon = document.createElement("img");
+      $imgIcon.setAttribute("src", iconUrl + ".png");
+
+      // 날씨 정보
+      document.querySelector(".w_id").innerText = wmain;
+      document.querySelector(".temp").innerHTML =
+        parseInt(temp - 273.15) + "&deg;";
+      document.querySelector(".temp_min").innerHTML =
+        parseInt(temp_min - 273.15) + "&deg;" + " min";
+      document.querySelector(".temp_max").innerHTML =
+        parseInt(temp_max - 273.15) + "&deg;" + " max";
+
+      document.querySelector(".contents").style = "visibility: hidden;";
+      $weatherInfo.style = "visibility: visible;";
     }
 
     return {
